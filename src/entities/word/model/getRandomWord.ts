@@ -1,5 +1,5 @@
-import type { WordLength } from '@/shared/config/game'
-import { WORDS_BY_LENGTH } from './words'
+import type { WordLength } from "@/shared/config/game"
+import { WORDS_BY_LENGTH } from "./words"
 
 /** Verilen uzunluktaki havuzdan rastgele bir kelime dondurur. */
 export function getRandomWord(length: WordLength): string {

@@ -1,1 +1,1 @@
-export { useHint } from './model/useHint'
+export { useHint } from "./model/useHint"

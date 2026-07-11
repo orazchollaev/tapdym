@@ -1,0 +1,18 @@
+# Build output
+dist
+dist-ssr
+
+# Dependencies
+node_modules
+
+# Native
+android
+ios
+
+# Lock files — let package manager handle formatting
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Generated
+CHANGELOG.md

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { Cell, CellState } from '@/entities/guess'
-import { cn } from '@/shared/lib/cn'
+import type { Cell, CellState } from "@/entities/guess"
+import { cn } from "@/shared/lib/cn"
 
 defineProps<{ rows: Cell[][] }>()
 
 const stateClass: Record<CellState, string> = {
-  empty: 'border-2 border-border bg-transparent',
-  filled: 'border-2 border-muted-foreground/50 bg-transparent text-foreground',
-  correct: 'border-2 border-transparent bg-correct text-correct-foreground',
-  present: 'border-2 border-transparent bg-present text-present-foreground',
-  absent: 'border-2 border-transparent bg-absent text-absent-foreground',
+  empty: "border-2 border-border bg-transparent",
+  filled: "border-2 border-muted-foreground/50 bg-transparent text-foreground",
+  correct: "border-2 border-transparent bg-correct text-correct-foreground",
+  present: "border-2 border-transparent bg-present text-present-foreground",
+  absent: "border-2 border-transparent bg-absent text-absent-foreground",
 }
 </script>
 
@@ -22,7 +22,7 @@ const stateClass: Record<CellState, string> = {
         :class="
           cn(
             'flex aspect-square w-full max-w-14 items-center justify-center rounded-md text-2xl font-bold uppercase transition-colors',
-            stateClass[cell.state],
+            stateClass[cell.state]
           )
         "
       >

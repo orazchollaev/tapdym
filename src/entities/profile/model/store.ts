@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { defineStore } from "pinia"
+import { ref } from "vue"
 
 /** Yeni oyuncuya verilen baslangic bakiyesi (ilk ipucular alinabilsin diye). */
 export const STARTING_POINTS = 100
@@ -9,7 +9,7 @@ export const STARTING_POINTS = 100
  * Ileride ayarlar/istatistik gibi alanlar buraya eklenebilir.
  */
 export const useProfileStore = defineStore(
-  'profile',
+  "profile",
   () => {
     const totalPoints = ref(STARTING_POINTS)
 
@@ -28,7 +28,7 @@ export const useProfileStore = defineStore(
   },
   {
     persist: {
-      key: 'tapdym-profile',
+      key: "tapdym-profile",
     },
-  },
+  }
 )

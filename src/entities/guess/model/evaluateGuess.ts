@@ -1,5 +1,5 @@
-import { splitGraphemes } from '@/shared/lib/text'
-import type { LetterState } from './types'
+import { splitGraphemes } from "@/shared/lib/text"
+import type { LetterState } from "./types"
 
 /**
  * Bir tahmini gizli kelimeye gore degerlendirir (klasik Wordle algoritmasi).
@@ -17,13 +17,13 @@ export function evaluateGuess(guess: string, answer: string): LetterState[] {
   const g = splitGraphemes(guess)
   const a = splitGraphemes(answer)
 
-  const result: LetterState[] = new Array(g.length).fill('absent')
+  const result: LetterState[] = new Array(g.length).fill("absent")
   const remaining = new Map<string, number>()
 
   // 1. gecis: tam eslesmeler
   for (let i = 0; i < g.length; i++) {
     if (g[i] === a[i]) {
-      result[i] = 'correct'
+      result[i] = "correct"
     } else {
       const letter = a[i]!
       remaining.set(letter, (remaining.get(letter) ?? 0) + 1)
@@ -32,11 +32,11 @@ export function evaluateGuess(guess: string, answer: string): LetterState[] {
 
   // 2. gecis: yanlis konumdaki mevcut harfler
   for (let i = 0; i < g.length; i++) {
-    if (result[i] === 'correct') continue
+    if (result[i] === "correct") continue
     const letter = g[i]!
     const count = remaining.get(letter) ?? 0
     if (count > 0) {
-      result[i] = 'present'
+      result[i] = "present"
       remaining.set(letter, count - 1)
     }
   }

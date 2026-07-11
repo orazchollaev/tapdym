@@ -1,1 +1,1 @@
-export { useProfileStore } from './model/store'
+export { useProfileStore } from "./model/store"

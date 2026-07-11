@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { WORD_LENGTHS, type WordLength } from '@/shared/config/game'
-import { LENGTH_BASE } from '@/shared/config/scoring'
-import { Button } from '@/shared/ui/button'
+import { WORD_LENGTHS, type WordLength } from "@/shared/config/game"
+import { LENGTH_BASE } from "@/shared/config/scoring"
+import { Button } from "@/shared/ui/button"
 
 const emit = defineEmits<{ select: [length: WordLength] }>()
 </script>
@@ -17,9 +17,7 @@ const emit = defineEmits<{ select: [length: WordLength] }>()
       @click="emit('select', len)"
     >
       <span class="font-semibold">{{ len }} harply söz</span>
-      <span class="text-sm text-muted-foreground">
-        {{ LENGTH_BASE[len] }}+ bal
-      </span>
+      <span class="text-sm text-muted-foreground">{{ LENGTH_BASE[len] }}+ bal</span>
     </Button>
   </div>
 </template>

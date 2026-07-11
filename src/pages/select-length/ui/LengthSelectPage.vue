@@ -1,29 +1,24 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import { ArrowLeft } from "@lucide/vue";
-import type { WordLength } from "@/shared/config/game";
-import { Button } from "@/shared/ui/button";
-import { LengthSelect } from "@/features/select-length";
-import { usePlayRoundStore } from "@/features/play-round";
+import { useRouter } from "vue-router"
+import { ArrowLeft } from "@lucide/vue"
+import type { WordLength } from "@/shared/config/game"
+import { Button } from "@/shared/ui/button"
+import { LengthSelect } from "@/features/select-length"
+import { usePlayRoundStore } from "@/features/play-round"
 
-const router = useRouter();
-const game = usePlayRoundStore();
+const router = useRouter()
+const game = usePlayRoundStore()
 
 function start(length: WordLength): void {
-  game.startGame(length);
-  router.push("/game");
+  game.startGame(length)
+  router.push("/game")
 }
 </script>
 
 <template>
   <main class="mx-auto flex min-h-full max-w-md flex-col px-6 py-8">
     <div class="flex items-center gap-3">
-      <Button
-        variant="ghost"
-        size="icon"
-        aria-label="Yza"
-        @click="router.push('/')"
-      >
+      <Button variant="ghost" size="icon" aria-label="Yza" @click="router.push('/')">
         <ArrowLeft class="size-5" />
       </Button>
       <h2 class="text-xl font-bold">Söz uzynlygyny saýla</h2>
