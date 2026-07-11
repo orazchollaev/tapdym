@@ -1,20 +1,31 @@
 /**
- * Türkmen (Latyn) klawiaturasy — resmi Windows KBDTURME düzeni (ÄWERTY).
- * Kaynak: https://kbdlayout.info/KBDTURME/
+ * Klawiatura düzeni — QWERTY esasy + basyp-saklama (long-press) bilen aksentli
+ * türkmen harplary. Ä, Ç, Ž, Ň, Ö, Ş, Ü, Ý aýratyn tuş däl; esasy harpy basyp
+ * saklanyňda ýokarsynda popover görünýär. Ol harplaryň sag ýokarsynda nokat bar.
  *
- * Gerçek düzen:
- *  - Üst harf hatary:  ä w e r t y u i o p ň ö
- *  - Orta hatar:       a s d f g h j k l ş
- *  - Aşaky hatar:      z ü ç ý b n m
- *  - `ž` fiziki klawiaturada san hatarynda (backtick); bu ýerde `z` bilen
- *    toparlanyp aşaky hatara goşuldy.
- * Enter (Gönder) we Backspace tuşlary widget'da aýratyn.
+ * Sebäbi: 30 harpy bir hatarda görkezmek tuşlary hetden aşa inçe edýär.
+ * QWERTY esasy (max 10 tuş/hatar) has giň, aňsat basylýan tuşlary berýär.
  */
 export const KEYBOARD_ROWS: readonly (readonly string[])[] = [
-  ["ä", "w", "e", "r", "t", "y", "u", "i", "o", "p", "ň", "ö"],
-  ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ş"],
-  ["ž", "z", "ü", "ç", "ý", "b", "n", "m"],
+  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+  ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+  ["z", "x", "c", "v", "b", "n", "m"],
 ] as const
 
-/** Ähli dogry harplar (barlaglar/erişim üçin tekiz sanaw). */
-export const ALPHABET: readonly string[] = KEYBOARD_ROWS.flat()
+/** Esasy harp -> basyp-saklama bilen çykýan aksentli görnüşleri. */
+export const KEY_VARIANTS: Record<string, readonly string[]> = {
+  a: ["ä"],
+  c: ["ç"],
+  z: ["ž"],
+  n: ["ň"],
+  o: ["ö"],
+  s: ["ş"],
+  u: ["ü"],
+  y: ["ý"],
+}
+
+/** Ähli girizilip bilinýän harplar (fiziki klawiatura süzgüji üçin). */
+export const ALPHABET: readonly string[] = [
+  ...KEYBOARD_ROWS.flat(),
+  ...Object.values(KEY_VARIANTS).flat(),
+]
