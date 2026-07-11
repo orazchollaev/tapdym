@@ -116,14 +116,14 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
 <template>
   <main class="game-scale mx-auto flex h-full max-w-[30rem] flex-col px-4 py-3">
     <header class="flex items-center gap-1.5 text-base">
-      <Button variant="ghost" size="icon" class="h-9 w-9 shrink-0" aria-label="Yza" @click="goMenu">
+      <Button variant="secondary" size="icon" class="h-9 w-9 shrink-0" aria-label="Yza" @click="goMenu">
         <ArrowLeft class="size-5" />
       </Button>
       <div
-        class="flex shrink-0 items-center gap-1 rounded-full border border-border bg-card px-2.5 py-1 text-sm"
+        class="flex shrink-0 items-center gap-1 rounded-full bg-present px-2.5 py-1 text-sm text-present-foreground shadow-[0_3px_0_var(--present-shadow)]"
       >
-        <Star class="size-4 text-primary" />
-        <span class="font-bold text-primary">{{ totalPoints }}</span>
+        <Star class="size-4 fill-current" />
+        <span class="font-black">{{ totalPoints }}</span>
       </div>
 
       <div class="ml-auto flex items-center gap-1.5">
@@ -160,7 +160,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
         </Button>
 
         <Button
-          variant="ghost"
+          variant="secondary"
           size="icon"
           class="h-9 w-9 shrink-0"
           aria-label="Sazlamalar"

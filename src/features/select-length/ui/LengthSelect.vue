@@ -13,11 +13,20 @@ const emit = defineEmits<{ select: [length: WordLength] }>()
       :key="len"
       variant="secondary"
       size="lg"
-      class="justify-between"
+      class="justify-start gap-4"
       @click="emit('select', len)"
     >
-      <span class="font-semibold">{{ len }} harply söz</span>
-      <span class="text-sm text-muted-foreground">{{ LENGTH_BASE[len] }}+ bal</span>
+      <span
+        class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-2xl font-black text-primary-foreground shadow-[0_3px_0_var(--primary-shadow)]"
+      >
+        {{ len }}
+      </span>
+      <span class="font-bold">harply söz</span>
+      <span
+        class="ml-auto flex items-center gap-1 rounded-full bg-present px-2.5 py-1 text-sm font-bold text-present-foreground"
+      >
+        {{ LENGTH_BASE[len] }}+ bal
+      </span>
     </Button>
   </div>
 </template>

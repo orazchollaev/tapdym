@@ -1,13 +1,16 @@
 import { cva, type VariantProps } from "class-variance-authority"
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 disabled:pointer-events-none disabled:opacity-50 select-none",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-bold transition-[transform,box-shadow,background-color] duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 disabled:pointer-events-none disabled:opacity-50 select-none",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        secondary: "bg-card text-card-foreground border border-border hover:bg-muted",
-        outline: "border border-border bg-transparent hover:bg-muted text-foreground",
+        // Juicy: reňk ýüz + goýurak aşaky dodak; basylanda aşak gysylýar.
+        default:
+          "bg-primary text-primary-foreground shadow-[0_4px_0_var(--primary-shadow)] hover:brightness-105 active:translate-y-[3px] active:shadow-[0_1px_0_var(--primary-shadow)]",
+        secondary:
+          "bg-card text-card-foreground shadow-[0_4px_0_var(--key-shadow)] hover:brightness-[1.03] active:translate-y-[3px] active:shadow-[0_1px_0_var(--key-shadow)]",
+        outline: "border-2 border-border bg-transparent hover:bg-muted text-foreground",
         ghost: "bg-transparent hover:bg-muted text-foreground",
       },
       size: {

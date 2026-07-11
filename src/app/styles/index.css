@@ -8,43 +8,59 @@
   --muted: #eadfc7;
   --muted-foreground: #6e5e4a;
   --border: #d8c9a8;
-  --primary: #9b2d22;
-  --primary-foreground: #f7efdf;
+  --primary: #b3352a;
+  --primary-foreground: #fef6e6;
+  --primary-shadow: #7d2019;
   --indigo: #33415c;
 
-  --correct: #9b2d22;
-  --correct-foreground: #f7efdf;
-  --present: #c08a2a;
+  --correct: #a83227;
+  --correct-foreground: #fef6e6;
+  --correct-shadow: #6f1f18;
+  --present: #cb922c;
   --present-foreground: #2a1a12;
+  --present-shadow: #8f6416;
   --absent: #a2937a;
-  --absent-foreground: #f7efdf;
+  --absent-foreground: #fef6e6;
+  --absent-shadow: #766a54;
   --accent: #b5651d;
-  --accent-foreground: #f7efdf;
+  --accent-foreground: #fef6e6;
 
-  --radius: 0.5rem;
-  --font-display: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
+  /* Galgan (raised) ýüzler — klawiş, kart, plitka. */
+  --key-face: #fff7e8;
+  --key-shadow: #cdbd9a;
+
+  --radius: 0.75rem;
+  --font-display: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-title: "Bricolage Grotesque", "Segoe UI", Roboto, system-ui, sans-serif;
 }
 
 :root.dark {
-  --background: #1e1610;
+  --background: #1a120c;
   --foreground: #f0e6d2;
-  --card: #2a1f17;
+  --card: #322419;
   --card-foreground: #f0e6d2;
-  --muted: #2a1f17;
-  --muted-foreground: #b3a489;
-  --border: #3c2e22;
-  --primary: #c24234;
-  --primary-foreground: #1e1610;
+  --muted: #251b12;
+  --muted-foreground: #b6a68a;
+  --border: #4a3a2b;
+  --primary: #cf4a3b;
+  --primary-foreground: #1a120c;
+  --primary-shadow: #6f1f16;
   --indigo: #7f93bf;
 
-  --correct: #b23a2c;
-  --correct-foreground: #f7efdf;
-  --present: #c39a3e;
+  --correct: #c1483a;
+  --correct-foreground: #fef6e6;
+  --correct-shadow: #6a1e16;
+  --present: #d0a544;
   --present-foreground: #211711;
-  --absent: #6e6353;
-  --absent-foreground: #f7efdf;
+  --present-shadow: #7a5c1e;
+  --absent: #7a6d59;
+  --absent-foreground: #fef6e6;
+  --absent-shadow: #3f382e;
   --accent: #d9862f;
-  --accent-foreground: #1e1610;
+  --accent-foreground: #1a120c;
+
+  --key-face: #40301f;
+  --key-shadow: #140d07;
 }
 
 /* CSS degiskenlerini Tailwind renk yardimcilarina bagla. */
@@ -67,6 +83,12 @@
   --color-absent-foreground: var(--absent-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-primary-shadow: var(--primary-shadow);
+  --color-correct-shadow: var(--correct-shadow);
+  --color-present-shadow: var(--present-shadow);
+  --color-absent-shadow: var(--absent-shadow);
+  --color-key-face: var(--key-face);
+  --color-key-shadow: var(--key-shadow);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -107,6 +129,8 @@ body {
 
 .font-display {
   font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .game-scale {
@@ -115,13 +139,16 @@ body {
 
 /* ---------- Animasiýalar ---------- */
 
-/* Harp ýazylanda öýjük pop (hondo pop_in). */
+/* Harp ýazylanda öýjük pop (hondo pop_in) — has springy. */
 @keyframes pop-in {
   0% {
-    transform: translateY(0.14em) scale(0.94);
+    transform: translateY(0.18em) scale(0.9);
   }
   45% {
-    transform: translateY(-0.06em) scale(1.04);
+    transform: translateY(-0.09em) scale(1.08);
+  }
+  70% {
+    transform: translateY(0.02em) scale(0.98);
   }
   100% {
     transform: translateY(0) scale(1);
@@ -161,17 +188,33 @@ body {
   }
 }
 
-/* Ýeňişde kazanan hatar bökýär. */
+/* Ýeňişde kazanan hatar bökýär — has ýokary/springy. */
 @keyframes bounce-win {
   0%,
   100% {
     transform: translateY(0);
   }
-  40% {
-    transform: translateY(-0.4em);
+  35% {
+    transform: translateY(-0.62em) scale(1.06);
   }
-  60% {
-    transform: translateY(-0.16em);
+  55% {
+    transform: translateY(-0.1em) scale(0.98);
+  }
+  75% {
+    transform: translateY(-0.24em);
+  }
+}
+
+/* Basylanda ýeňil squash (juicy press). */
+@keyframes press-squash {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(2px) scale(0.96, 0.92);
+  }
+  100% {
+    transform: translateY(0) scale(1);
   }
 }
 

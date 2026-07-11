@@ -19,12 +19,13 @@ const emit = defineEmits<{
 const lastRow = KEYBOARD_ROWS.length - 1
 
 const stateClass: Record<LetterState, string> = {
-  correct: "bg-correct text-correct-foreground",
-  present: "bg-present text-present-foreground",
-  absent: "bg-absent text-absent-foreground",
+  correct: "bg-correct text-correct-foreground shadow-[0_3px_0_var(--correct-shadow)]",
+  present: "bg-present text-present-foreground shadow-[0_3px_0_var(--present-shadow)]",
+  absent: "bg-absent text-absent-foreground shadow-[0_3px_0_var(--absent-shadow)]",
 }
+/** Galgan tuş: aşaky dodak + basylanda aşak gysylýar. */
 const baseKey =
-  "key-btn flex h-full w-full items-center justify-center rounded-md font-semibold uppercase select-none transition-colors active:scale-95 disabled:opacity-60"
+  "key-btn flex h-full w-full items-center justify-center rounded-lg font-bold uppercase select-none transition-[transform,box-shadow,background-color] duration-100 active:translate-y-[2px] active:shadow-[0_1px_0_var(--key-shadow)] disabled:opacity-60"
 
 /** Häzir popover açyk bolan esasy harp (ýa-da null). */
 const activeKey = ref<string | null>(null)
@@ -83,7 +84,12 @@ function closePopover(): void {
         type="button"
         :disabled="disabled"
         aria-label="Gönder"
-        :class="cn(baseKey, 'key key--control bg-primary text-primary-foreground')"
+        :class="
+          cn(
+            baseKey,
+            'key key--control bg-primary text-primary-foreground shadow-[0_3px_0_var(--primary-shadow)]'
+          )
+        "
         @click="emit('submit')"
       >
         <SendHorizontal class="size-5" />
@@ -94,7 +100,12 @@ function closePopover(): void {
           type="button"
           :disabled="disabled"
           :class="
-            cn(baseKey, keyStates[ch] ? stateClass[keyStates[ch]] : 'bg-card text-card-foreground')
+            cn(
+              baseKey,
+              keyStates[ch]
+                ? stateClass[keyStates[ch]]
+                : 'bg-key-face text-foreground shadow-[0_3px_0_var(--key-shadow)]'
+            )
           "
           @pointerdown="onPointerDown(ch)"
           @pointerup="onPointerUp(ch)"
@@ -111,13 +122,13 @@ function closePopover(): void {
 
         <div
           v-if="activeKey === ch"
-          class="absolute bottom-full left-1/2 z-50 mb-1.5 flex -translate-x-1/2 gap-1 rounded-lg border border-border bg-card p-1 shadow-lg"
+          class="absolute bottom-full left-1/2 z-50 mb-1.5 flex -translate-x-1/2 gap-1 rounded-xl border-2 border-border bg-card p-1.5 shadow-xl"
         >
           <button
             v-for="v in variantsOf(ch)"
             :key="v"
             type="button"
-            class="flex h-11 min-w-11 items-center justify-center rounded-md bg-muted px-2 text-xl font-semibold uppercase text-foreground active:scale-95"
+            class="flex h-11 min-w-11 items-center justify-center rounded-lg bg-key-face px-2 text-xl font-bold uppercase text-foreground shadow-[0_3px_0_var(--key-shadow)] transition-transform active:translate-y-[2px] active:shadow-[0_1px_0_var(--key-shadow)]"
             @click="selectVariant(v)"
           >
             {{ v }}
@@ -125,13 +136,17 @@ function closePopover(): void {
         </div>
       </div>
 
-      <!-- Poz (backspace): aşaky hataryň sag tarapynda -->
       <button
         v-if="r === lastRow"
         type="button"
         :disabled="disabled"
         aria-label="Poz"
-        :class="cn(baseKey, 'key key--control bg-muted text-foreground')"
+        :class="
+          cn(
+            baseKey,
+            'key key--control bg-key-face text-foreground shadow-[0_3px_0_var(--key-shadow)]'
+          )
+        "
         @click="emit('backspace')"
       >
         <Delete class="size-5" />
@@ -153,21 +168,9 @@ function closePopover(): void {
 .keyboard {
   position: relative;
   display: grid;
-  grid-template-rows: repeat(3, 3.5rem);
-  margin: 0 calc(-1rem + 5px);
+  grid-template-rows: repeat(3, 50px);
+  margin: 0 calc(-1rem + 6px);
   touch-action: manipulation;
-}
-
-@media (min-height: 44rem) {
-  .keyboard {
-    grid-template-rows: repeat(3, 4rem);
-  }
-}
-
-@media (min-height: 50rem) {
-  .keyboard {
-    grid-template-rows: repeat(3, 4.2rem);
-  }
 }
 
 .row {
@@ -177,7 +180,7 @@ function closePopover(): void {
 }
 
 .row + .row {
-  margin-top: 5px;
+  margin-top: 7px;
 }
 
 /* Orta hatar — girintili we ortalanan. */
@@ -192,7 +195,7 @@ function closePopover(): void {
 }
 
 .key + .key {
-  margin-left: 5px;
+  margin-left: 7px;
 }
 
 /* Gönder / Poz — has giň. */
@@ -205,7 +208,6 @@ function closePopover(): void {
   position: relative;
   padding: 0;
   font-size: 1.1rem;
-  line-height: 1;
 }
 
 @media (min-width: 26rem) {

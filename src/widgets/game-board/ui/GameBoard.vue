@@ -12,12 +12,13 @@ const props = defineProps<{
   winRow?: number | null
 }>()
 
+// Juicy: doly reňk ýüz + goýurak aşaky "dodak" (inset shadow) = tagtaly görnüş.
 const stateClass: Record<CellState, string> = {
-  empty: "border-2 border-border bg-transparent",
-  filled: "border-2 border-muted-foreground/50 bg-transparent text-foreground",
-  correct: "border-2 border-transparent bg-correct text-correct-foreground",
-  present: "border-2 border-transparent bg-present text-present-foreground",
-  absent: "border-2 border-transparent bg-absent text-absent-foreground",
+  empty: "border-2 border-border bg-transparent text-foreground",
+  filled: "bg-key-face text-foreground shadow-[inset_0_-0.16em_0_var(--key-shadow)]",
+  correct: "bg-correct text-correct-foreground shadow-[inset_0_-0.18em_0_var(--correct-shadow)]",
+  present: "bg-present text-present-foreground shadow-[inset_0_-0.18em_0_var(--present-shadow)]",
+  absent: "bg-absent text-absent-foreground shadow-[inset_0_-0.18em_0_var(--absent-shadow)]",
 }
 </script>
 
@@ -34,7 +35,7 @@ const stateClass: Record<CellState, string> = {
         :style="revealRow === r || winRow === r ? { animationDelay: `${c * 90}ms` } : undefined"
         :class="
           cn(
-            'flex aspect-square w-full min-w-[1.4em] max-w-[1.9em] items-center justify-center rounded-md text-[1.1em] font-bold uppercase transition-colors',
+            'flex aspect-square w-full min-w-[1.4em] max-w-[1.9em] items-center justify-center rounded-xl text-[1.1em] font-extrabold uppercase transition-colors',
             stateClass[cell.state],
             cell.state === 'filled' && 'cell-pop',
             revealRow === r && 'cell-reveal',
@@ -45,23 +46,6 @@ const stateClass: Record<CellState, string> = {
         {{ cell.letter }}
       </div>
     </div>
-
-    <!-- Signature: ýeňişde dokma dikişi çyzylýar. -->
-    <svg
-      v-if="winRow !== null && winRow !== undefined"
-      class="stitch mt-[0.15em] w-[70%] self-center text-primary"
-      viewBox="0 0 120 8"
-      fill="none"
-      stroke="currentColor"
-      aria-hidden="true"
-    >
-      <path
-        d="M0 6 L6 2 L12 6 L18 2 L24 6 L30 2 L36 6 L42 2 L48 6 L54 2 L60 6 L66 2 L72 6 L78 2 L84 6 L90 2 L96 6 L102 2 L108 6 L114 2 L120 6"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
   </div>
 </template>
 
@@ -73,23 +57,17 @@ const stateClass: Record<CellState, string> = {
   animation: reveal-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 .cell-win {
-  animation: bounce-win 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: bounce-win 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 .row-shake {
   animation: shake 0.4s ease;
-}
-.stitch path {
-  --stitch-len: 200;
-  stroke-dasharray: 200;
-  animation: stitch-draw 0.7s ease-out 0.2s both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cell-pop,
   .cell-reveal,
   .cell-win,
-  .row-shake,
-  .stitch path {
+  .row-shake {
     animation: none !important;
   }
 }

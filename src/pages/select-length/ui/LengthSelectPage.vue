@@ -18,7 +18,7 @@ function start(length: WordLength): void {
 <template>
   <main class="mx-auto flex min-h-full max-w-md flex-col px-6 py-8">
     <div class="flex items-center gap-3">
-      <Button variant="ghost" size="icon" aria-label="Yza" @click="router.push('/')">
+      <Button variant="secondary" size="icon" aria-label="Yza" @click="router.push('/')">
         <ArrowLeft class="size-5" />
       </Button>
       <h2 class="font-display text-2xl font-bold">Söz uzynlygyny saýla</h2>

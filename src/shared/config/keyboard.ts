@@ -7,15 +7,13 @@
  * QWERTY esasy (max 10 tuş/hatar) has giň, aňsat basylýan tuşlary berýär.
  */
 export const KEYBOARD_ROWS: readonly (readonly string[])[] = [
-  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+  ["ä", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-  ["z", "x", "c", "v", "b", "n", "m"],
+  ["z", "ž", "c", "ç", "b", "n", "m"],
 ] as const
 
 /** Esasy harp -> basyp-saklama bilen çykýan aksentli görnüşleri. */
 export const KEY_VARIANTS: Record<string, readonly string[]> = {
-  a: ["ä"],
-  c: ["ç"],
   z: ["ž"],
   n: ["ň"],
   o: ["ö"],

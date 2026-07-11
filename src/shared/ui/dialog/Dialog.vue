@@ -23,12 +23,11 @@ const emit = defineEmits<{ "update:open": [value: boolean] }>()
   <DialogRoot :open="open" @update:open="emit('update:open', $event)">
     <DialogPortal>
       <DialogOverlay class="dialog-overlay fixed inset-0 z-40 bg-[rgb(0_0_0/0.55)]" />
-      <!-- Doly ekran flex-ortalaýjy (translate-çaknyşyk ýok). -->
       <DialogContent
         class="fixed inset-0 z-50 flex items-center justify-center p-4 focus:outline-none"
       >
         <div
-          class="dialog-card relative w-full max-w-sm rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-2xl"
+          class="dialog-card relative w-full max-w-sm rounded-3xl border-2 border-border bg-background p-6 text-card-foreground shadow-2xl"
         >
           <DialogClose
             class="absolute right-3 top-3 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
@@ -36,7 +35,6 @@ const emit = defineEmits<{ "update:open": [value: boolean] }>()
           >
             <X class="size-4" />
           </DialogClose>
-          <!-- Erişilebilirlik üçin DialogTitle hemişe bar (görünmese sr-only). -->
           <DialogTitle :class="title ? 'font-display text-2xl font-bold pr-6' : 'sr-only'">
             {{ title ?? "Maglumat" }}
           </DialogTitle>
@@ -58,7 +56,7 @@ const emit = defineEmits<{ "update:open": [value: boolean] }>()
   animation: overlay-out 0.18s ease both;
 }
 .dialog-card {
-  animation: card-in 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: card-in 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 [data-state="closed"] .dialog-card {
   animation: card-out 0.18s ease both;
@@ -83,7 +81,7 @@ const emit = defineEmits<{ "update:open": [value: boolean] }>()
 @keyframes card-in {
   from {
     opacity: 0;
-    transform: translateY(1rem) scale(0.96);
+    transform: translateY(1.25rem) scale(0.9);
   }
   to {
     opacity: 1;
