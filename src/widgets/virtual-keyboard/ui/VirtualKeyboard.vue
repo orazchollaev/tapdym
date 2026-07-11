@@ -54,12 +54,10 @@ function onPointerDown(ch: string): void {
 
 function onPointerUp(ch: string): void {
   if (props.disabled) return
-  // Popover açyk däl bolsa (basyp-saklama işlemedi) -> adaty basyş.
   if (activeKey.value !== ch) {
     clearTimer()
     emit("letter", ch)
   }
-  // Popover açyk bolsa: goýbermek harp saýlamaýar, ulanyjy görnüşi saýlaýar.
 }
 
 function onPointerLeave(): void {
@@ -105,14 +103,12 @@ function closePopover(): void {
           @contextmenu.prevent
         >
           {{ ch }}
-          <!-- Ek harply tuşlaryň sag ýokarsynda nokat. -->
           <span
             v-if="variantsOf(ch).length"
             class="pointer-events-none absolute right-1 top-1 size-1.5 rounded-full bg-primary/70"
           />
         </button>
 
-        <!-- Long-press popover: aksentli görnüşler. -->
         <div
           v-if="activeKey === ch"
           class="absolute bottom-full left-1/2 z-50 mb-1.5 flex -translate-x-1/2 gap-1 rounded-lg border border-border bg-card p-1 shadow-lg"
@@ -142,20 +138,18 @@ function closePopover(): void {
       </button>
     </div>
 
-    <!-- Popover açykka daşyna basylsa ýapylýar. -->
     <button
       v-if="activeKey"
       type="button"
       aria-hidden="true"
       tabindex="-1"
       class="fixed inset-0 z-40 cursor-default"
-      @click="closePopover"
+      @pointerdown="closePopover"
     />
   </div>
 </template>
 
 <style scoped>
-/* Ölçeg/ýerleşiş ulgamy — Wordle-görnüşli klawiatura düzgüni. */
 .keyboard {
   position: relative;
   display: grid;
