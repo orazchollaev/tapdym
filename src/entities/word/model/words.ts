@@ -71,7 +71,7 @@ const words4 = [
 
 const words5 = [
   "çörek",
-  "kitap",
+  "galam",
   "balyk",
   "burun",
   "darak",
@@ -162,6 +162,9 @@ const words5 = [
   "syçan",
   "teşne",
   "ýaňak",
+  "gatyk",
+  "maral",
+  "bahar",
 ]
 
 const words6 = [
@@ -213,7 +216,6 @@ const words6 = [
   "zergär",
 ]
 
-/** Uzunluga gore kelime havuzu. */
 export const WORDS_BY_LENGTH: Record<WordLength, readonly string[]> = {
   4: words4,
   5: words5,

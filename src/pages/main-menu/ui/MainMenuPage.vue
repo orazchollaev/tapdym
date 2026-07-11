@@ -4,7 +4,6 @@ import { storeToRefs } from "pinia"
 import { LogOut, Play, Settings, Star } from "@lucide/vue"
 import { APP_AUTHOR, APP_VERSION } from "@/shared/config/app"
 import { Button } from "@/shared/ui/button"
-import { Gul } from "@/shared/ui/motif"
 import { useProfileStore } from "@/entities/profile"
 
 const router = useRouter()
@@ -12,7 +11,6 @@ const profile = useProfileStore()
 const { totalPoints } = storeToRefs(profile)
 
 function exit(): void {
-  // Web ortaminda pencereyi kapatmaya calis (mumkun olmayabilir).
   window.close()
 }
 </script>
@@ -21,11 +19,6 @@ function exit(): void {
   <main
     class="relative mx-auto flex min-h-full max-w-md flex-col items-center overflow-hidden px-6 py-10"
   >
-    <!-- Signature: gül madalýon suw belligi -->
-    <Gul
-      class="pointer-events-none absolute left-1/2 top-[38%] w-[78vmin] max-w-md -translate-x-1/2 -translate-y-1/2 text-indigo opacity-[0.06]"
-    />
-
     <div class="relative flex w-full flex-1 flex-col items-center justify-center gap-8">
       <header class="text-center">
         <h1 class="anim-fade-up font-display text-6xl font-extrabold tracking-tight text-primary">
