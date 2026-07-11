@@ -3,7 +3,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import { storeToRefs } from "pinia"
 import confetti from "canvas-confetti"
-import { ArrowLeft, Lightbulb, Star } from "@lucide/vue"
+import { ArrowLeft, Lightbulb, Settings, Star } from "@lucide/vue"
 import { ALPHABET } from "@/shared/config/keyboard"
 import { splitGraphemes } from "@/shared/lib/text"
 import { Button } from "@/shared/ui/button"
@@ -12,6 +12,7 @@ import { useProfileStore } from "@/entities/profile"
 import { usePlayRoundStore } from "@/features/play-round"
 import { useHint } from "@/features/reveal-letter"
 import { GameBoard } from "@/widgets/game-board"
+import { SettingsDialog } from "@/widgets/settings-dialog"
 import { VirtualKeyboard } from "@/widgets/virtual-keyboard"
 
 const router = useRouter()
@@ -45,6 +46,7 @@ const answerLetters = computed(() => splitGraphemes(answer.value))
 const shakeRow = ref<number | null>(null)
 const winRow = ref<number | null>(null)
 const dialogOpen = ref(false)
+const settingsOpen = ref(false)
 
 const revealDuration = () => length.value * 90 + 450
 
@@ -118,16 +120,21 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
         <Star class="size-4 text-primary" />
         <span class="font-bold text-primary">{{ totalPoints }}</span>
       </div>
-      <Button
-        variant="secondary"
-        size="default"
-        :disabled="!hint.canReveal.value"
-        class="gap-1.5 text-sm"
-        @click="hint.reveal()"
-      >
-        <Lightbulb class="size-4" />
-        Harp aç · {{ hint.cost }}
-      </Button>
+      <div class="flex items-center gap-1.5">
+        <Button
+          variant="secondary"
+          size="default"
+          :disabled="!hint.canReveal.value"
+          class="gap-1.5 text-sm"
+          @click="hint.reveal()"
+        >
+          <Lightbulb class="size-4" />
+          Harp aç · {{ hint.cost }}
+        </Button>
+        <Button variant="ghost" size="icon" aria-label="Sazlamalar" @click="settingsOpen = true">
+          <Settings class="size-5" />
+        </Button>
+      </div>
     </header>
 
     <!-- Ipucu iskeleti -->
@@ -192,5 +199,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
         </div>
       </div>
     </Dialog>
+
+    <SettingsDialog v-model:open="settingsOpen" />
   </main>
 </template>

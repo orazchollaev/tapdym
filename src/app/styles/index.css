@@ -18,31 +18,33 @@
   --present-foreground: #2a1a12;
   --absent: #a2937a;
   --absent-foreground: #f7efdf;
+  --accent: #b5651d;
+  --accent-foreground: #f7efdf;
 
   --radius: 0.5rem;
   --font-display: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1e1610;
-    --foreground: #f0e6d2;
-    --card: #2a1f17;
-    --card-foreground: #f0e6d2;
-    --muted: #2a1f17;
-    --muted-foreground: #b3a489;
-    --border: #3c2e22;
-    --primary: #c24234;
-    --primary-foreground: #1e1610;
-    --indigo: #7f93bf;
+:root.dark {
+  --background: #1e1610;
+  --foreground: #f0e6d2;
+  --card: #2a1f17;
+  --card-foreground: #f0e6d2;
+  --muted: #2a1f17;
+  --muted-foreground: #b3a489;
+  --border: #3c2e22;
+  --primary: #c24234;
+  --primary-foreground: #1e1610;
+  --indigo: #7f93bf;
 
-    --correct: #b23a2c;
-    --correct-foreground: #f7efdf;
-    --present: #c39a3e;
-    --present-foreground: #211711;
-    --absent: #6e6353;
-    --absent-foreground: #f7efdf;
-  }
+  --correct: #b23a2c;
+  --correct-foreground: #f7efdf;
+  --present: #c39a3e;
+  --present-foreground: #211711;
+  --absent: #6e6353;
+  --absent-foreground: #f7efdf;
+  --accent: #d9862f;
+  --accent-foreground: #1e1610;
 }
 
 /* CSS degiskenlerini Tailwind renk yardimcilarina bagla. */
@@ -63,6 +65,8 @@
   --color-present-foreground: var(--present-foreground);
   --color-absent: var(--absent);
   --color-absent-foreground: var(--absent-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);

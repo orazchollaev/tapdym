@@ -6,7 +6,9 @@ import {
   DialogContent,
   DialogTitle,
   DialogDescription,
+  DialogClose,
 } from "reka-ui"
+import { X } from "@lucide/vue"
 
 defineProps<{
   open: boolean
@@ -26,10 +28,16 @@ const emit = defineEmits<{ "update:open": [value: boolean] }>()
         class="fixed inset-0 z-50 flex items-center justify-center p-4 focus:outline-none"
       >
         <div
-          class="dialog-card w-full max-w-sm rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-2xl"
+          class="dialog-card relative w-full max-w-sm rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-2xl"
         >
+          <DialogClose
+            class="absolute right-3 top-3 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+            aria-label="Ýap"
+          >
+            <X class="size-4" />
+          </DialogClose>
           <!-- Erişilebilirlik üçin DialogTitle hemişe bar (görünmese sr-only). -->
-          <DialogTitle :class="title ? 'font-display text-2xl font-bold' : 'sr-only'">
+          <DialogTitle :class="title ? 'font-display text-2xl font-bold pr-6' : 'sr-only'">
             {{ title ?? "Maglumat" }}
           </DialogTitle>
           <DialogDescription v-if="description" class="mt-1 text-sm text-muted-foreground">

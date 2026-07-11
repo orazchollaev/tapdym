@@ -1,14 +1,19 @@
 <script setup lang="ts">
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { storeToRefs } from "pinia"
 import { LogOut, Play, Settings, Star } from "@lucide/vue"
 import { APP_AUTHOR, APP_VERSION } from "@/shared/config/app"
 import { Button } from "@/shared/ui/button"
 import { useProfileStore } from "@/entities/profile"
+import { FallingLeaves } from "@/widgets/falling-leaves"
+import { SettingsDialog } from "@/widgets/settings-dialog"
 
 const router = useRouter()
 const profile = useProfileStore()
 const { totalPoints } = storeToRefs(profile)
+
+const settingsOpen = ref(false)
 
 function exit(): void {
   window.close()
@@ -19,7 +24,9 @@ function exit(): void {
   <main
     class="relative mx-auto flex min-h-full max-w-md flex-col items-center overflow-hidden px-6 py-10"
   >
-    <div class="relative flex w-full flex-1 flex-col items-center justify-center gap-8">
+    <FallingLeaves />
+
+    <div class="relative z-10 flex w-full flex-1 flex-col items-center justify-center gap-8">
       <header class="text-center">
         <h1 class="anim-fade-up font-display text-6xl font-extrabold tracking-tight text-primary">
           Tapdym
@@ -58,7 +65,7 @@ function exit(): void {
           <Play class="size-5" />
           Başla
         </Button>
-        <Button size="lg" variant="secondary" class="gap-2" @click="router.push('/settings')">
+        <Button size="lg" variant="secondary" class="gap-2" @click="settingsOpen = true">
           <Settings class="size-5" />
           Sazlamalar
         </Button>
@@ -75,6 +82,8 @@ function exit(): void {
     >
       v{{ APP_VERSION }} · {{ APP_AUTHOR }}
     </footer>
+
+    <SettingsDialog v-model:open="settingsOpen" />
   </main>
 </template>
 
