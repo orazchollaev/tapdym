@@ -8,14 +8,14 @@ export const LENGTH_BASE: Record<WordLength, number> = {
 }
 
 export const PER_GUESS_BONUS: Record<WordLength, number> = {
-  4: 4,
-  5: 6,
-  6: 10,
+  4: 2,
+  5: 4,
+  6: 6,
 }
 
-export const HINT_COST = 25
+export const HINT_COST = 15
 
-export const CATEGORY_REVEAL_COST = 10
+export const CATEGORY_REVEAL_COST = 5
 
 /**
  * @param length kelime uzunlugu

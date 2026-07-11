@@ -1,5 +1,6 @@
 import { computed } from "vue"
 import { HINT_COST } from "@/shared/config/scoring"
+import { MAX_REVEALS } from "@/shared/config/game"
 import { useProfileStore } from "@/entities/profile"
 import { usePlayRoundStore } from "@/features/play-round"
 
@@ -13,9 +14,11 @@ export function useHint() {
   const game = usePlayRoundStore()
 
   const canAfford = computed(() => profile.totalPoints >= HINT_COST)
-  const canReveal = computed(
-    () => game.canPlay && canAfford.value && Object.keys(game.revealed).length < game.length
+  /** Ýene açyp bolýan harp sany (limit — açylan). */
+  const remaining = computed(() =>
+    Math.max(0, MAX_REVEALS[game.length] - Object.keys(game.revealed).length)
   )
+  const canReveal = computed(() => game.canPlay && canAfford.value && remaining.value > 0)
 
   function reveal(): boolean {
     if (!canReveal.value) return false
@@ -29,5 +32,5 @@ export function useHint() {
     return true
   }
 
-  return { cost: HINT_COST, canAfford, canReveal, reveal }
+  return { cost: HINT_COST, canAfford, canReveal, remaining, reveal }
 }

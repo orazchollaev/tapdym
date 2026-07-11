@@ -1,6 +1,6 @@
 import { computed, ref } from "vue"
 import { defineStore } from "pinia"
-import { MAX_GUESSES, type WordLength } from "@/shared/config/game"
+import { MAX_GUESSES, FREE_REVEALS, type WordLength } from "@/shared/config/game"
 import { calcScore } from "@/shared/config/scoring"
 import type { WordCategoryId } from "@/shared/config/categories"
 import { splitGraphemes } from "@/shared/lib/text"
@@ -80,9 +80,18 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     revealRow.value = null
     status.value = "playing"
 
-    // Oýny ýeňilleşdirmek üçin: her oýnuň başynda bir harp mugt açylýar.
-    const pos = Math.floor(Math.random() * len)
-    revealed.value = { [pos]: answerLetters.value[pos]! }
+    // Oýny ýeňilleşdirmek üçin: başda uzynlyga görä birnäçe harp mugt açylýar.
+    const freeCount = Math.min(FREE_REVEALS[len], len)
+    const positions = Array.from({ length: len }, (_, i) => i)
+    for (let i = positions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[positions[i], positions[j]] = [positions[j]!, positions[i]!]
+    }
+    const opened: Record<number, string> = {}
+    for (const pos of positions.slice(0, freeCount)) {
+      opened[pos] = answerLetters.value[pos]!
+    }
+    revealed.value = opened
   }
 
   function addLetter(letter: string): void {

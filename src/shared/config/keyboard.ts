@@ -9,7 +9,7 @@
 export const KEYBOARD_ROWS: readonly (readonly string[])[] = [
   ["ä", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-  ["z", "ž", "c", "ç", "b", "n", "m"],
+  ["z", "ž", "ý", "ç", "b", "n", "m"],
 ] as const
 
 /** Esasy harp -> basyp-saklama bilen çykýan aksentli görnüşleri. */
@@ -19,7 +19,6 @@ export const KEY_VARIANTS: Record<string, readonly string[]> = {
   o: ["ö"],
   s: ["ş"],
   u: ["ü"],
-  y: ["ý"],
 }
 
 /** Ähli girizilip bilinýän harplar (fiziki klawiatura süzgüji üçin). */

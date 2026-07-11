@@ -116,7 +116,13 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
 <template>
   <main class="game-scale mx-auto flex h-full max-w-[30rem] flex-col px-4 py-3">
     <header class="flex items-center gap-1.5 text-base">
-      <Button variant="secondary" size="icon" class="h-9 w-9 shrink-0" aria-label="Yza" @click="goMenu">
+      <Button
+        variant="secondary"
+        size="icon"
+        class="h-9 w-9 shrink-0"
+        aria-label="Yza"
+        @click="goMenu"
+      >
         <ArrowLeft class="size-5" />
       </Button>
       <div
@@ -127,7 +133,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
       </div>
 
       <div class="ml-auto flex items-center gap-1.5">
-        <!-- Harp aç -->
+        <!-- Harp aç (galan hak · baha) -->
         <Button
           variant="secondary"
           class="h-9 gap-1 px-2.5 text-sm"
@@ -136,7 +142,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
           @click="hint.reveal()"
         >
           <Lightbulb class="size-4" />
-          {{ hint.cost }}
+          <span class="tabular-nums">{{ hint.remaining.value }}× · {{ hint.cost }}</span>
         </Button>
 
         <!-- Kategoriýa: aç ýa-da görkez -->

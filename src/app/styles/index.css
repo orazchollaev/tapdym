@@ -35,32 +35,32 @@
 }
 
 :root.dark {
-  --background: #1a120c;
+  --background: #1e1610;
   --foreground: #f0e6d2;
-  --card: #322419;
+  --card: #2a1f17;
   --card-foreground: #f0e6d2;
-  --muted: #251b12;
-  --muted-foreground: #b6a68a;
-  --border: #4a3a2b;
-  --primary: #cf4a3b;
-  --primary-foreground: #1a120c;
-  --primary-shadow: #6f1f16;
+  --muted: #2a1f17;
+  --muted-foreground: #b3a489;
+  --border: #3c2e22;
+  --primary: #c24234;
+  --primary-foreground: #1e1610;
+  --primary-shadow: #7a241a;
   --indigo: #7f93bf;
 
-  --correct: #c1483a;
+  --correct: #a83227;
   --correct-foreground: #fef6e6;
-  --correct-shadow: #6a1e16;
-  --present: #d0a544;
-  --present-foreground: #211711;
-  --present-shadow: #7a5c1e;
-  --absent: #7a6d59;
+  --correct-shadow: #6f1f18;
+  --present: #cb922c;
+  --present-foreground: #2a1a12;
+  --present-shadow: #8f6416;
+  --absent: #a2937a;
   --absent-foreground: #fef6e6;
-  --absent-shadow: #3f382e;
-  --accent: #d9862f;
-  --accent-foreground: #1a120c;
+  --absent-shadow: #766a54;
+  --accent: #b5651d;
+  --accent-foreground: #fef6e6;
 
-  --key-face: #40301f;
-  --key-shadow: #140d07;
+  --key-face: #34271d;
+  --key-shadow: #17100b;
 }
 
 /* CSS degiskenlerini Tailwind renk yardimcilarina bagla. */
