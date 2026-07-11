@@ -1,0 +1,92 @@
+@import 'tailwindcss';
+
+/*
+  Tema — 60-30-10 kurali, goz yormayan yumusak renkler.
+  60% dominant: background (notr)
+  30% ikincil:  card / surface / muted (hafif kontrast paneller)
+  10% aksan:    primary (tek marka rengi)
+  Durum renkleri (correct/present/absent) bilincli olarak MUTED.
+  Acik/koyu tema `prefers-color-scheme` ile.
+*/
+
+:root {
+  --background: hsl(40 30% 97%);
+  --foreground: hsl(215 25% 20%);
+  --card: hsl(40 22% 93%);
+  --card-foreground: hsl(215 25% 20%);
+  --muted: hsl(40 16% 90%);
+  --muted-foreground: hsl(215 12% 45%);
+  --border: hsl(215 15% 84%);
+  --primary: hsl(200 45% 42%);
+  --primary-foreground: hsl(0 0% 100%);
+
+  /* Oyun durum renkleri */
+  --correct: hsl(120 25% 46%);
+  --correct-foreground: hsl(0 0% 100%);
+  --present: hsl(42 52% 54%);
+  --present-foreground: hsl(40 40% 12%);
+  --absent: hsl(215 12% 60%);
+  --absent-foreground: hsl(0 0% 100%);
+
+  --radius: 0.625rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: hsl(220 18% 12%);
+    --foreground: hsl(210 20% 92%);
+    --card: hsl(220 15% 17%);
+    --card-foreground: hsl(210 20% 92%);
+    --muted: hsl(220 14% 22%);
+    --muted-foreground: hsl(215 12% 62%);
+    --border: hsl(220 12% 27%);
+    --primary: hsl(195 45% 52%);
+    --primary-foreground: hsl(220 25% 10%);
+
+    --correct: hsl(120 22% 40%);
+    --correct-foreground: hsl(0 0% 100%);
+    --present: hsl(42 42% 48%);
+    --present-foreground: hsl(40 40% 10%);
+    --absent: hsl(220 8% 36%);
+    --absent-foreground: hsl(0 0% 100%);
+  }
+}
+
+/* CSS degiskenlerini Tailwind renk yardimcilarina bagla. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-correct: var(--correct);
+  --color-correct-foreground: var(--correct-foreground);
+  --color-present: var(--present);
+  --color-present-foreground: var(--present-foreground);
+  --color-absent: var(--absent);
+  --color-absent-foreground: var(--absent-foreground);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family:
+    'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* Mobil: tus/hucre dokunuslarinda metin secimini ve vurguyu engelle. */
+  -webkit-tap-highlight-color: transparent;
+}
