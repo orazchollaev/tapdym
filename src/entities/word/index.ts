@@ -1,2 +1,2 @@
-export { WORDS_BY_LENGTH } from "./model/words"
+export { WORDS_BY_LENGTH, type WordEntry } from "./model/words"
 export { getRandomWord } from "./model/getRandomWord"

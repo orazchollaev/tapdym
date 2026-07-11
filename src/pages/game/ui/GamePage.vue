@@ -3,14 +3,16 @@ import { computed, onMounted, onUnmounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import { storeToRefs } from "pinia"
 import confetti from "canvas-confetti"
-import { ArrowLeft, Lightbulb, Settings, Star } from "@lucide/vue"
+import { ArrowLeft, Lightbulb, Settings, Star, Tag } from "@lucide/vue"
 import { ALPHABET } from "@/shared/config/keyboard"
+import { WORD_CATEGORIES } from "@/shared/config/categories"
 import { splitGraphemes } from "@/shared/lib/text"
 import { Button } from "@/shared/ui/button"
 import { Dialog } from "@/shared/ui/dialog"
 import { useProfileStore } from "@/entities/profile"
 import { usePlayRoundStore } from "@/features/play-round"
 import { useHint } from "@/features/reveal-letter"
+import { useCategoryHint } from "@/features/reveal-category"
 import { GameBoard } from "@/widgets/game-board"
 import { SettingsDialog } from "@/widgets/settings-dialog"
 import { VirtualKeyboard } from "@/widgets/virtual-keyboard"
@@ -19,6 +21,7 @@ const router = useRouter()
 const game = usePlayRoundStore()
 const profile = useProfileStore()
 const hint = useHint()
+const catHint = useCategoryHint()
 
 const {
   status,
@@ -28,6 +31,8 @@ const {
   hasRevealed,
   lastScore,
   answer,
+  answerCategory,
+  categoryRevealed,
   revealRow,
   shakeNonce,
   currentRow,
@@ -110,28 +115,57 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
 
 <template>
   <main class="game-scale mx-auto flex h-full max-w-[30rem] flex-col px-4 py-3">
-    <header class="flex items-center justify-between gap-2 text-base">
-      <Button variant="ghost" size="icon" aria-label="Yza" @click="goMenu">
+    <header class="flex items-center gap-1.5 text-base">
+      <Button variant="ghost" size="icon" class="h-9 w-9 shrink-0" aria-label="Yza" @click="goMenu">
         <ArrowLeft class="size-5" />
       </Button>
       <div
-        class="flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-sm"
+        class="flex shrink-0 items-center gap-1 rounded-full border border-border bg-card px-2.5 py-1 text-sm"
       >
         <Star class="size-4 text-primary" />
         <span class="font-bold text-primary">{{ totalPoints }}</span>
       </div>
-      <div class="flex items-center gap-1.5">
+
+      <div class="ml-auto flex items-center gap-1.5">
+        <!-- Harp aç -->
         <Button
           variant="secondary"
-          size="default"
+          class="h-9 gap-1 px-2.5 text-sm"
           :disabled="!hint.canReveal.value"
-          class="gap-1.5 text-sm"
+          aria-label="Harp aç"
           @click="hint.reveal()"
         >
           <Lightbulb class="size-4" />
-          Harp aç · {{ hint.cost }}
+          {{ hint.cost }}
         </Button>
-        <Button variant="ghost" size="icon" aria-label="Sazlamalar" @click="settingsOpen = true">
+
+        <!-- Kategoriýa: aç ýa-da görkez -->
+        <div
+          v-if="categoryRevealed"
+          class="flex h-9 items-center gap-1 rounded-md border border-dashed border-primary/50 px-2.5 text-sm font-semibold text-primary"
+        >
+          <Tag class="size-4 shrink-0" />
+          {{ WORD_CATEGORIES[answerCategory] }}
+        </div>
+        <Button
+          v-else
+          variant="secondary"
+          class="h-9 gap-1 px-2.5 text-sm"
+          :disabled="!catHint.canReveal.value"
+          aria-label="Kategoriýa aç"
+          @click="catHint.reveal()"
+        >
+          <Tag class="size-4" />
+          {{ catHint.cost }}
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          class="h-9 w-9 shrink-0"
+          aria-label="Sazlamalar"
+          @click="settingsOpen = true"
+        >
           <Settings class="size-5" />
         </Button>
       </div>

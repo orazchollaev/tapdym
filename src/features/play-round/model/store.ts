@@ -2,6 +2,7 @@ import { computed, ref } from "vue"
 import { defineStore } from "pinia"
 import { MAX_GUESSES, type WordLength } from "@/shared/config/game"
 import { calcScore } from "@/shared/config/scoring"
+import type { WordCategoryId } from "@/shared/config/categories"
 import { splitGraphemes } from "@/shared/lib/text"
 import { getRandomWord } from "@/entities/word"
 import { bestLetterState, evaluateGuess, type Cell, type LetterState } from "@/entities/guess"
@@ -14,6 +15,8 @@ export const usePlayRoundStore = defineStore("play-round", () => {
 
   const length = ref<WordLength>(5)
   const answer = ref("")
+  const answerCategory = ref<WordCategoryId>("umumy")
+  const categoryRevealed = ref(false)
   const answerLetters = computed(() => splitGraphemes(answer.value))
 
   const submittedRows = ref<Cell[][]>([])
@@ -64,7 +67,10 @@ export const usePlayRoundStore = defineStore("play-round", () => {
 
   function startGame(len: WordLength): void {
     length.value = len
-    answer.value = getRandomWord(len)
+    const entry = getRandomWord(len)
+    answer.value = entry.text
+    answerCategory.value = entry.category
+    categoryRevealed.value = false
     submittedRows.value = []
     currentGuess.value = []
     keyStates.value = {}
@@ -147,6 +153,11 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     return true
   }
 
+  /** Kelimenin kategorisini acar (puan kontrolu/harcamasi cagiran tarafta). */
+  function revealCategory(): void {
+    if (canPlay.value) categoryRevealed.value = true
+  }
+
   /** Reveal animasiýasy gutaransoň hatar belligini arassalaýar. */
   function clearReveal(): void {
     revealRow.value = null
@@ -159,6 +170,8 @@ export const usePlayRoundStore = defineStore("play-round", () => {
   return {
     length,
     answer,
+    answerCategory,
+    categoryRevealed,
     status,
     keyStates,
     revealed,
@@ -177,6 +190,7 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     removeLetter,
     submitGuess,
     revealRandomLetter,
+    revealCategory,
     clearReveal,
     resetToIdle,
   }

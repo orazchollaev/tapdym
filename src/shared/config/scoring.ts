@@ -13,7 +13,10 @@ export const PER_GUESS_BONUS: Record<WordLength, number> = {
   6: 18,
 }
 
-export const HINT_COST = 15
+export const HINT_COST = 1
+
+/** Kelimenin kategorisini acmak icin harcanacak puan. */
+export const CATEGORY_REVEAL_COST = 1
 
 /**
  * Kazanilan puan: taban + (kullanilmayan hak) * bonus.
