@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Delete } from 'lucide-vue-next'
+import { Delete, SendHorizontal } from 'lucide-vue-next'
 import { KEYBOARD_ROWS } from '@/shared/config/keyboard'
 import type { LetterState } from '@/entities/guess'
 import { cn } from '@/shared/lib/cn'
@@ -15,13 +15,15 @@ const emit = defineEmits<{
   backspace: []
 }>()
 
+const lastRow = KEYBOARD_ROWS.length - 1
+
 const stateClass: Record<LetterState, string> = {
   correct: 'bg-correct text-correct-foreground',
   present: 'bg-present text-present-foreground',
   absent: 'bg-absent text-absent-foreground',
 }
 const baseKey =
-  'flex h-12 flex-1 items-center justify-center rounded-md text-base font-semibold uppercase select-none transition-colors active:scale-95 disabled:opacity-60'
+  'flex h-12 items-center justify-center rounded-md text-base font-semibold uppercase select-none transition-colors active:scale-95 disabled:opacity-60'
 </script>
 
 <template>
@@ -31,32 +33,36 @@ const baseKey =
       :key="r"
       class="flex justify-center gap-1"
     >
+      <!-- Gönder: aşaky hataryň çep tarapynda (ž-den öň) -->
+      <button
+        v-if="r === lastRow"
+        type="button"
+        :disabled="disabled"
+        aria-label="Gönder"
+        :class="cn(baseKey, 'flex-[1.4] bg-primary text-primary-foreground')"
+        @click="emit('submit')"
+      >
+        <SendHorizontal class="size-5" />
+      </button>
+
       <button
         v-for="ch in row"
         :key="ch"
         type="button"
         :disabled="disabled"
-        :class="cn(baseKey, keyStates[ch] ? stateClass[keyStates[ch]] : 'bg-card text-card-foreground')"
+        :class="cn(baseKey, 'flex-1', keyStates[ch] ? stateClass[keyStates[ch]] : 'bg-card text-card-foreground')"
         @click="emit('letter', ch)"
       >
         {{ ch }}
       </button>
-    </div>
 
-    <div class="flex gap-1">
+      <!-- Poz (backspace): aşaky hataryň sag tarapynda (m-den soň) -->
       <button
+        v-if="r === lastRow"
         type="button"
         :disabled="disabled"
-        :class="cn(baseKey, 'grow-[2] bg-primary text-primary-foreground text-sm')"
-        @click="emit('submit')"
-      >
-        Gönder
-      </button>
-      <button
-        type="button"
-        :disabled="disabled"
-        :class="cn(baseKey, 'grow-[2] bg-muted text-foreground')"
         aria-label="Poz"
+        :class="cn(baseKey, 'flex-[1.4] bg-muted text-foreground')"
         @click="emit('backspace')"
       >
         <Delete class="size-5" />
