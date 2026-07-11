@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Delete } from 'lucide-vue-next'
 import { KEYBOARD_ROWS } from '@/shared/config/keyboard'
 import type { LetterState } from '@/entities/guess'
 import { cn } from '@/shared/lib/cn'
@@ -54,11 +55,11 @@ const baseKey =
       <button
         type="button"
         :disabled="disabled"
-        :class="cn(baseKey, 'grow-[2] bg-muted text-foreground text-xl')"
+        :class="cn(baseKey, 'grow-[2] bg-muted text-foreground')"
         aria-label="Poz"
         @click="emit('backspace')"
       >
-        ⌫
+        <Delete class="size-5" />
       </button>
     </div>
   </div>

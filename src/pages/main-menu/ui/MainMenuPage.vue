@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { LogOut, Play, Settings, Star } from 'lucide-vue-next'
 import { APP_AUTHOR, APP_VERSION } from '@/shared/config/app'
 import { Button } from '@/shared/ui/button'
 import { useProfileStore } from '@/entities/profile'
@@ -28,17 +29,30 @@ function exit(): void {
       </header>
 
       <div
-        class="rounded-lg bg-card px-4 py-2 text-sm text-card-foreground border border-border"
+        class="flex items-center gap-2 rounded-lg bg-card px-4 py-2 text-sm text-card-foreground border border-border"
       >
+        <Star class="size-4 text-primary" />
         Jemi bal: <span class="font-bold text-primary">{{ totalPoints }}</span>
       </div>
 
       <nav class="flex w-full flex-col gap-3">
-        <Button size="lg" @click="router.push('/select')">Başla</Button>
-        <Button size="lg" variant="secondary" @click="router.push('/settings')">
+        <Button size="lg" class="gap-2" @click="router.push('/select')">
+          <Play class="size-5" />
+          Başla
+        </Button>
+        <Button
+          size="lg"
+          variant="secondary"
+          class="gap-2"
+          @click="router.push('/settings')"
+        >
+          <Settings class="size-5" />
           Sazlamalar
         </Button>
-        <Button size="lg" variant="ghost" @click="exit">Çykyş</Button>
+        <Button size="lg" variant="ghost" class="gap-2" @click="exit">
+          <LogOut class="size-5" />
+          Çykyş
+        </Button>
       </nav>
     </div>
 

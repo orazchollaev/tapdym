@@ -2,6 +2,7 @@
 import { computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { ArrowLeft, Lightbulb, Star } from 'lucide-vue-next'
 import { ALPHABET } from '@/shared/config/keyboard'
 import { Button } from '@/shared/ui/button'
 import { useProfileStore } from '@/entities/profile'
@@ -59,19 +60,23 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   <main class="mx-auto flex h-full max-w-md flex-col px-4 py-3">
     <!-- Ust bar -->
     <header class="flex items-center justify-between gap-2">
-      <Button variant="ghost" size="icon" @click="goMenu">←</Button>
+      <Button variant="ghost" size="icon" aria-label="Yza" @click="goMenu">
+        <ArrowLeft class="size-5" />
+      </Button>
       <div
-        class="rounded-md bg-card px-3 py-1 text-sm border border-border"
+        class="flex items-center gap-1.5 rounded-md bg-card px-3 py-1 text-sm border border-border"
       >
-        Bal: <span class="font-bold text-primary">{{ totalPoints }}</span>
+        <Star class="size-4 text-primary" />
+        <span class="font-bold text-primary">{{ totalPoints }}</span>
       </div>
       <Button
         variant="secondary"
         size="default"
         :disabled="!hint.canReveal.value"
-        class="text-sm"
+        class="gap-1.5 text-sm"
         @click="hint.reveal()"
       >
+        <Lightbulb class="size-4" />
         Harp aç · {{ hint.cost }}
       </Button>
     </header>
