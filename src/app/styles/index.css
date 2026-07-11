@@ -1,15 +1,5 @@
 @import "tailwindcss";
 
-/*
-  Tema — Türkmen halysy (paper/ink). hondo cilasy: güýçli aksan, em-ölçeg,
-  translateY "pop" animasiýalary. Reňkler bilinçli suratda ýumşak/tebigy.
-    - Fon (kagyz/çäge)   : dominant
-    - Kart / muted       : ýüzler
-    - primary (gyrmyzy)  : ýeke aksan
-  Durum reňkleri: correct = halynyň hero gyrmyzysy, present = altyn, absent = daş.
-  Açyk/goýy tema `prefers-color-scheme` bilen.
-*/
-
 :root {
   --background: #f3ead6;
   --foreground: #2a1a12;
@@ -22,7 +12,6 @@
   --primary-foreground: #f7efdf;
   --indigo: #33415c;
 
-  /* Oýun durum reňkleri */
   --correct: #9b2d22;
   --correct-foreground: #f7efdf;
   --present: #c08a2a;
@@ -86,6 +75,13 @@ body,
   height: 100%;
 }
 
+html {
+  padding-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+  padding-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  padding-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
+  padding-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
+}
+
 body {
   margin: 0;
   background-color: var(--background);
@@ -109,10 +105,6 @@ body {
   font-family: var(--font-display);
 }
 
-/*
-  Oýun ekrany em-ölçeg köki (hondo usuly): board + klawiatura viewport'a görä
-  ölçeglenýär. Ähli tuş/öýjük ölçegleri em cinsinden.
-*/
 .game-scale {
   font-size: clamp(16px, 7.2vmin, 26px);
 }

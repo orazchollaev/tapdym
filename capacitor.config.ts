@@ -14,6 +14,14 @@ const config: CapacitorConfig = {
       style: "LIGHT",
       backgroundColor: "#f3ead6",
     },
+    plugins: {
+      SystemBars: {
+        insetsHandling: "css",
+        style: "LIGHT",
+        hidden: false,
+        animation: "NONE",
+      },
+    },
   },
 }
 
