@@ -5,4 +5,4 @@ export const WORD_LENGTHS = [4, 5, 6] as const
 export type WordLength = (typeof WORD_LENGTHS)[number]
 
 /** Her kelime icin tahmin (satir) hakki. */
-export const MAX_GUESSES = 6
+export const MAX_GUESSES = 5

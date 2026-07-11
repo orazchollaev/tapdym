@@ -12,10 +12,10 @@ const router = useRouter()
       <Button variant="ghost" size="icon" aria-label="Yza" @click="router.push('/')">
         <ArrowLeft class="size-5" />
       </Button>
-      <h2 class="text-xl font-bold">Sazlamalar</h2>
+      <h2 class="font-display text-2xl font-bold">Sazlamalar</h2>
     </div>
 
-    <div class="flex flex-1 items-center justify-center">
+    <div class="anim-fade-up flex flex-1 items-center justify-center">
       <p class="text-center text-muted-foreground">Sazlamalar ýakynda goşular.</p>
     </div>
   </main>

@@ -1,54 +1,58 @@
 @import "tailwindcss";
 
 /*
-  Tema — 60-30-10 kurali, goz yormayan yumusak renkler.
-  60% dominant: background (notr)
-  30% ikincil:  card / surface / muted (hafif kontrast paneller)
-  10% aksan:    primary (tek marka rengi)
-  Durum renkleri (correct/present/absent) bilincli olarak MUTED.
-  Acik/koyu tema `prefers-color-scheme` ile.
+  Tema — Türkmen halysy (paper/ink). hondo cilasy: güýçli aksan, em-ölçeg,
+  translateY "pop" animasiýalary. Reňkler bilinçli suratda ýumşak/tebigy.
+    - Fon (kagyz/çäge)   : dominant
+    - Kart / muted       : ýüzler
+    - primary (gyrmyzy)  : ýeke aksan
+  Durum reňkleri: correct = halynyň hero gyrmyzysy, present = altyn, absent = daş.
+  Açyk/goýy tema `prefers-color-scheme` bilen.
 */
 
 :root {
-  --background: hsl(40 30% 97%);
-  --foreground: hsl(215 25% 20%);
-  --card: hsl(40 22% 93%);
-  --card-foreground: hsl(215 25% 20%);
-  --muted: hsl(40 16% 90%);
-  --muted-foreground: hsl(215 12% 45%);
-  --border: hsl(215 15% 84%);
-  --primary: hsl(200 45% 42%);
-  --primary-foreground: hsl(0 0% 100%);
+  --background: #f3ead6;
+  --foreground: #2a1a12;
+  --card: #e8dcc0;
+  --card-foreground: #2a1a12;
+  --muted: #eadfc7;
+  --muted-foreground: #6e5e4a;
+  --border: #d8c9a8;
+  --primary: #9b2d22;
+  --primary-foreground: #f7efdf;
+  --indigo: #33415c;
 
-  /* Oyun durum renkleri */
-  --correct: hsl(120 25% 46%);
-  --correct-foreground: hsl(0 0% 100%);
-  --present: hsl(42 52% 54%);
-  --present-foreground: hsl(40 40% 12%);
-  --absent: hsl(215 12% 60%);
-  --absent-foreground: hsl(0 0% 100%);
+  /* Oýun durum reňkleri */
+  --correct: #9b2d22;
+  --correct-foreground: #f7efdf;
+  --present: #c08a2a;
+  --present-foreground: #2a1a12;
+  --absent: #a2937a;
+  --absent-foreground: #f7efdf;
 
-  --radius: 0.625rem;
+  --radius: 0.5rem;
+  --font-display: "Bricolage Grotesque", "IBM Plex Sans", system-ui, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: hsl(220 18% 12%);
-    --foreground: hsl(210 20% 92%);
-    --card: hsl(220 15% 17%);
-    --card-foreground: hsl(210 20% 92%);
-    --muted: hsl(220 14% 22%);
-    --muted-foreground: hsl(215 12% 62%);
-    --border: hsl(220 12% 27%);
-    --primary: hsl(195 45% 52%);
-    --primary-foreground: hsl(220 25% 10%);
+    --background: #1e1610;
+    --foreground: #f0e6d2;
+    --card: #2a1f17;
+    --card-foreground: #f0e6d2;
+    --muted: #2a1f17;
+    --muted-foreground: #b3a489;
+    --border: #3c2e22;
+    --primary: #c24234;
+    --primary-foreground: #1e1610;
+    --indigo: #7f93bf;
 
-    --correct: hsl(120 22% 40%);
-    --correct-foreground: hsl(0 0% 100%);
-    --present: hsl(42 42% 48%);
-    --present-foreground: hsl(40 40% 10%);
-    --absent: hsl(220 8% 36%);
-    --absent-foreground: hsl(0 0% 100%);
+    --correct: #b23a2c;
+    --correct-foreground: #f7efdf;
+    --present: #c39a3e;
+    --present-foreground: #211711;
+    --absent: #6e6353;
+    --absent-foreground: #f7efdf;
   }
 }
 
@@ -63,6 +67,7 @@
   --color-border: var(--border);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-indigo: var(--indigo);
   --color-correct: var(--correct);
   --color-correct-foreground: var(--correct-foreground);
   --color-present: var(--present);
@@ -72,6 +77,7 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+  --font-display: var(--font-display);
 }
 
 html,
@@ -93,7 +99,130 @@ body {
     Helvetica,
     Arial,
     sans-serif;
+  /* hondo: kararly taban agyrlyk. */
+  font-weight: 500;
   -webkit-font-smoothing: antialiased;
-  /* Mobil: tus/hucre dokunuslarinda metin secimini ve vurguyu engelle. */
   -webkit-tap-highlight-color: transparent;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/*
+  Oýun ekrany em-ölçeg köki (hondo usuly): board + klawiatura viewport'a görä
+  ölçeglenýär. Ähli tuş/öýjük ölçegleri em cinsinden.
+*/
+.game-scale {
+  font-size: clamp(16px, 7.2vmin, 26px);
+}
+
+/* ---------- Animasiýalar ---------- */
+
+/* Harp ýazylanda öýjük pop (hondo pop_in). */
+@keyframes pop-in {
+  0% {
+    transform: translateY(0.14em) scale(0.94);
+  }
+  45% {
+    transform: translateY(-0.06em) scale(1.04);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Submit — öýjük ýokary "pop" bolup reňk alýar (kademeli). */
+@keyframes reveal-pop {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-0.34em);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Ýalňyş/kem Enter — hatar sarsýar. */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-0.32em);
+  }
+  40% {
+    transform: translateX(0.32em);
+  }
+  60% {
+    transform: translateX(-0.2em);
+  }
+  80% {
+    transform: translateX(0.2em);
+  }
+}
+
+/* Ýeňişde kazanan hatar bökýär. */
+@keyframes bounce-win {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-0.4em);
+  }
+  60% {
+    transform: translateY(-0.16em);
+  }
+}
+
+/* Netije/burç — aşakdan galyp peýda bolýar. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Menýu giriş — ýumşak galyş. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Signature — dokma dikişiniň çyzylyşy. */
+@keyframes stitch-draw {
+  from {
+    stroke-dashoffset: var(--stitch-len, 200);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.anim-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

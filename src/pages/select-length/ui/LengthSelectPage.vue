@@ -21,10 +21,10 @@ function start(length: WordLength): void {
       <Button variant="ghost" size="icon" aria-label="Yza" @click="router.push('/')">
         <ArrowLeft class="size-5" />
       </Button>
-      <h2 class="text-xl font-bold">Söz uzynlygyny saýla</h2>
+      <h2 class="font-display text-2xl font-bold">Söz uzynlygyny saýla</h2>
     </div>
 
-    <div class="flex flex-1 flex-col justify-center">
+    <div class="anim-fade-up flex flex-1 flex-col justify-center">
       <LengthSelect @select="start" />
       <p class="mt-6 text-center text-sm text-muted-foreground">
         Uzyn söz = köp bal. Az synanyşyk = köp bal.

@@ -23,6 +23,10 @@ export const usePlayRoundStore = defineStore("play-round", () => {
   const revealed = ref<Record<number, string>>({})
   const hintsUsed = ref(0)
   const lastScore = ref(0)
+  /** Häzir "reveal" animasiýasy geçýän hatar (ýa-da null). */
+  const revealRow = ref<number | null>(null)
+  /** Kem harply Enter — sarsylma tetigi (her gezek artýar). */
+  const shakeNonce = ref(0)
 
   const currentRow = computed(() => submittedRows.value.length)
   const isFull = computed(() => currentGuess.value.length === length.value)
@@ -67,6 +71,7 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     revealed.value = {}
     hintsUsed.value = 0
     lastScore.value = 0
+    revealRow.value = null
     status.value = "playing"
 
     // Oýny ýeňilleşdirmek üçin: her oýnuň başynda bir harp mugt açylýar.
@@ -85,7 +90,12 @@ export const usePlayRoundStore = defineStore("play-round", () => {
   }
 
   function submitGuess(): void {
-    if (!canPlay.value || !isFull.value) return
+    if (!canPlay.value) return
+    if (!isFull.value) {
+      // Kem harp bilen Enter — hatar sarsýar, tabşyrylmaýar.
+      shakeNonce.value += 1
+      return
+    }
 
     const guess = currentGuess.value.join("")
     const states = evaluateGuess(guess, answer.value)
@@ -96,6 +106,7 @@ export const usePlayRoundStore = defineStore("play-round", () => {
       state: states[i]!,
     }))
     submittedRows.value.push(row)
+    revealRow.value = submittedRows.value.length - 1
 
     // Klavye renklerini guncelle (en iyi durum kalir).
     const next = { ...keyStates.value }
@@ -136,6 +147,11 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     return true
   }
 
+  /** Reveal animasiýasy gutaransoň hatar belligini arassalaýar. */
+  function clearReveal(): void {
+    revealRow.value = null
+  }
+
   function resetToIdle(): void {
     status.value = "idle"
   }
@@ -148,6 +164,8 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     revealed,
     hintsUsed,
     lastScore,
+    revealRow,
+    shakeNonce,
     currentRow,
     isFull,
     canPlay,
@@ -159,6 +177,7 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     removeLetter,
     submitGuess,
     revealRandomLetter,
+    clearReveal,
     resetToIdle,
   }
 })
