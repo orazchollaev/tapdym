@@ -6,7 +6,7 @@
   },
   "github": {
     "release": true,
-    "repository": "orazchollaev/tapdym"
+    "repository": "orazchollaev/invictus-tournament-maker"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
