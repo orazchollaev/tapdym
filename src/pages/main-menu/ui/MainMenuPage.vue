@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
-import { LogOut, Play, Settings, Star } from 'lucide-vue-next'
-import { APP_AUTHOR, APP_VERSION } from '@/shared/config/app'
-import { Button } from '@/shared/ui/button'
-import { useProfileStore } from '@/entities/profile'
+import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+import { LogOut, Play, Settings, Star } from "@lucide/vue";
+import { APP_AUTHOR, APP_VERSION } from "@/shared/config/app";
+import { Button } from "@/shared/ui/button";
+import { useProfileStore } from "@/entities/profile";
 
-const router = useRouter()
-const profile = useProfileStore()
-const { totalPoints } = storeToRefs(profile)
+const router = useRouter();
+const profile = useProfileStore();
+const { totalPoints } = storeToRefs(profile);
 
 function exit(): void {
   // Web ortaminda pencereyi kapatmaya calis (mumkun olmayabilir).
-  window.close()
+  window.close();
 }
 </script>
 

@@ -1,7 +1,7 @@
 {
   "name": "tapdym",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.1",
   "author": "Oraz Chollaev",
   "type": "module",
   "scripts": {
@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@fontsource/ibm-plex-sans": "^5.2.8",
+    "@lucide/vue": "^1.24.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-vue-next": "^1.0.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
     "reka-ui": "^2.10.1",

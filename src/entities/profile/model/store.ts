@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+/** Yeni oyuncuya verilen baslangic bakiyesi (ilk ipucular alinabilsin diye). */
+export const STARTING_POINTS = 100
+
 /**
  * Kalici oyuncu profili — puanlar localStorage'da saklanir.
  * Ileride ayarlar/istatistik gibi alanlar buraya eklenebilir.
@@ -8,7 +11,7 @@ import { ref } from 'vue'
 export const useProfileStore = defineStore(
   'profile',
   () => {
-    const totalPoints = ref(0)
+    const totalPoints = ref(STARTING_POINTS)
 
     function addPoints(amount: number): void {
       if (amount > 0) totalPoints.value += amount

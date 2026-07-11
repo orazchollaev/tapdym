@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { Delete, SendHorizontal } from 'lucide-vue-next'
-import { KEYBOARD_ROWS } from '@/shared/config/keyboard'
-import type { LetterState } from '@/entities/guess'
-import { cn } from '@/shared/lib/cn'
+import { Delete, SendHorizontal } from "@lucide/vue";
+import { KEYBOARD_ROWS } from "@/shared/config/keyboard";
+import type { LetterState } from "@/entities/guess";
+import { cn } from "@/shared/lib/cn";
 
 defineProps<{
-  keyStates: Record<string, LetterState>
-  disabled?: boolean
-}>()
+  keyStates: Record<string, LetterState>;
+  disabled?: boolean;
+}>();
 
 const emit = defineEmits<{
-  letter: [ch: string]
-  submit: []
-  backspace: []
-}>()
+  letter: [ch: string];
+  submit: [];
+  backspace: [];
+}>();
 
-const lastRow = KEYBOARD_ROWS.length - 1
+const lastRow = KEYBOARD_ROWS.length - 1;
 
 const stateClass: Record<LetterState, string> = {
-  correct: 'bg-correct text-correct-foreground',
-  present: 'bg-present text-present-foreground',
-  absent: 'bg-absent text-absent-foreground',
-}
+  correct: "bg-correct text-correct-foreground",
+  present: "bg-present text-present-foreground",
+  absent: "bg-absent text-absent-foreground",
+};
 const baseKey =
-  'flex h-12 items-center justify-center rounded-md text-base font-semibold uppercase select-none transition-colors active:scale-95 disabled:opacity-60'
+  "flex h-12 items-center justify-center rounded-md text-base font-semibold uppercase select-none transition-colors active:scale-95 disabled:opacity-60";
 </script>
 
 <template>
@@ -50,7 +50,15 @@ const baseKey =
         :key="ch"
         type="button"
         :disabled="disabled"
-        :class="cn(baseKey, 'flex-1', keyStates[ch] ? stateClass[keyStates[ch]] : 'bg-card text-card-foreground')"
+        :class="
+          cn(
+            baseKey,
+            'flex-1',
+            keyStates[ch]
+              ? stateClass[keyStates[ch]]
+              : 'bg-card text-card-foreground',
+          )
+        "
         @click="emit('letter', ch)"
       >
         {{ ch }}

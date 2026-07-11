@@ -1,59 +1,68 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
-import { ArrowLeft, Lightbulb, Star } from 'lucide-vue-next'
-import { ALPHABET } from '@/shared/config/keyboard'
-import { Button } from '@/shared/ui/button'
-import { useProfileStore } from '@/entities/profile'
-import { usePlayRoundStore } from '@/features/play-round'
-import { useHint } from '@/features/reveal-letter'
-import { GameBoard } from '@/widgets/game-board'
-import { VirtualKeyboard } from '@/widgets/virtual-keyboard'
+import { computed, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+import { ArrowLeft, Lightbulb, Star } from "@lucide/vue";
+import { ALPHABET } from "@/shared/config/keyboard";
+import { Button } from "@/shared/ui/button";
+import { useProfileStore } from "@/entities/profile";
+import { usePlayRoundStore } from "@/features/play-round";
+import { useHint } from "@/features/reveal-letter";
+import { GameBoard } from "@/widgets/game-board";
+import { VirtualKeyboard } from "@/widgets/virtual-keyboard";
 
-const router = useRouter()
-const game = usePlayRoundStore()
-const profile = useProfileStore()
-const hint = useHint()
+const router = useRouter();
+const game = usePlayRoundStore();
+const profile = useProfileStore();
+const hint = useHint();
 
-const { status, keyStates, displayRows, revealedSkeleton, hasRevealed, lastScore, answer } =
-  storeToRefs(game)
-const { totalPoints } = storeToRefs(profile)
+const {
+  status,
+  keyStates,
+  displayRows,
+  revealedSkeleton,
+  hasRevealed,
+  lastScore,
+  answer,
+} = storeToRefs(game);
+const { totalPoints } = storeToRefs(profile);
 
 // Oyun oturumu yoksa (dogrudan gezinme) uzunluk secimine don.
-if (game.status === 'idle') {
-  router.replace('/select')
+if (game.status === "idle") {
+  router.replace("/select");
 }
 
-const isOver = computed(() => status.value === 'won' || status.value === 'lost')
+const isOver = computed(
+  () => status.value === "won" || status.value === "lost",
+);
 
 function handleLetter(ch: string): void {
-  game.addLetter(ch)
+  game.addLetter(ch);
 }
 
 function onKeydown(e: KeyboardEvent): void {
-  if (isOver.value) return
-  if (e.key === 'Enter') {
-    game.submitGuess()
-  } else if (e.key === 'Backspace') {
-    game.removeLetter()
+  if (isOver.value) return;
+  if (e.key === "Enter") {
+    game.submitGuess();
+  } else if (e.key === "Backspace") {
+    game.removeLetter();
   } else if (e.key.length === 1 && ALPHABET.includes(e.key.toLowerCase())) {
-    game.addLetter(e.key.toLowerCase())
+    game.addLetter(e.key.toLowerCase());
   }
 }
 
 function playAgain(): void {
-  game.resetToIdle()
-  router.replace('/select')
+  game.resetToIdle();
+  router.replace("/select");
 }
 
 function goMenu(): void {
-  game.resetToIdle()
-  router.replace('/')
+  game.resetToIdle();
+  router.replace("/");
 }
 
-onMounted(() => window.addEventListener('keydown', onKeydown))
-onUnmounted(() => window.removeEventListener('keydown', onKeydown))
+onMounted(() => window.addEventListener("keydown", onKeydown));
+onUnmounted(() => window.removeEventListener("keydown", onKeydown));
 </script>
 
 <template>
@@ -113,7 +122,9 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       </p>
       <div class="mt-3 flex gap-2">
         <Button class="flex-1" @click="playAgain">Täzeden</Button>
-        <Button variant="secondary" class="flex-1" @click="goMenu">Menýu</Button>
+        <Button variant="secondary" class="flex-1" @click="goMenu"
+          >Menýu</Button
+        >
       </div>
     </div>
 
