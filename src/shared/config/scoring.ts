@@ -2,25 +2,22 @@ import type { WordLength } from "./game"
 import { MAX_GUESSES } from "./game"
 
 export const LENGTH_BASE: Record<WordLength, number> = {
-  4: 40,
-  5: 60,
-  6: 80,
+  4: 20,
+  5: 30,
+  6: 50,
 }
 
 export const PER_GUESS_BONUS: Record<WordLength, number> = {
-  4: 12,
-  5: 15,
-  6: 18,
+  4: 4,
+  5: 6,
+  6: 10,
 }
 
-export const HINT_COST = 1
+export const HINT_COST = 25
 
-/** Kelimenin kategorisini acmak icin harcanacak puan. */
-export const CATEGORY_REVEAL_COST = 1
+export const CATEGORY_REVEAL_COST = 10
 
 /**
- * Kazanilan puan: taban + (kullanilmayan hak) * bonus.
- * Az tahminle + uzun kelime = yuksek puan.
  * @param length kelime uzunlugu
  * @param attemptsUsed kazanmak icin kullanilan tahmin sayisi (1..MAX_GUESSES)
  */
