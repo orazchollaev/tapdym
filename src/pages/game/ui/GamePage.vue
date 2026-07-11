@@ -48,20 +48,17 @@ const dialogOpen = ref(false)
 
 const revealDuration = () => length.value * 90 + 450
 
-// Reveal animasiýasy gutaransoň belligi arassala.
 watch(revealRow, (r) => {
   if (r !== null) {
     window.setTimeout(() => game.clearReveal(), revealDuration())
   }
 })
 
-// Kem harply Enter — degişli hatary sars.
 watch(shakeNonce, () => {
   shakeRow.value = currentRow.value
   window.setTimeout(() => (shakeRow.value = null), 450)
 })
 
-// Oýun soňy — reveal gutaransoň bökme + konfetti + netije penjiresi.
 watch(status, (s) => {
   if (s === "won") {
     const delay = revealDuration()
@@ -111,7 +108,6 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
 
 <template>
   <main class="game-scale mx-auto flex h-full max-w-[30rem] flex-col px-4 py-3">
-    <!-- Ust bar -->
     <header class="flex items-center justify-between gap-2 text-base">
       <Button variant="ghost" size="icon" aria-label="Yza" @click="goMenu">
         <ArrowLeft class="size-5" />
