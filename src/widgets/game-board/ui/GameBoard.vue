@@ -34,7 +34,7 @@ const stateClass: Record<CellState, string> = {
         :style="revealRow === r || winRow === r ? { animationDelay: `${c * 90}ms` } : undefined"
         :class="
           cn(
-            'flex aspect-square w-full max-w-[1.5em] items-center justify-center rounded-md text-[1.4em] font-bold uppercase transition-colors',
+            'flex aspect-square w-full min-w-[1.4em] max-w-[1.9em] items-center justify-center rounded-md text-[1.1em] font-bold uppercase transition-colors',
             stateClass[cell.state],
             cell.state === 'filled' && 'cell-pop',
             revealRow === r && 'cell-reveal',
