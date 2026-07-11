@@ -4,9 +4,9 @@ const config: CapacitorConfig = {
   appId: "com.orazchollaev.tapdym",
   appName: "Tapdym",
   webDir: "dist",
-  backgroundColor: "#191d24",
+  backgroundColor: "#f3ead6",
   android: {
-    backgroundColor: "#191d24",
+    backgroundColor: "#f3ead6",
   },
   plugins: {
     StatusBar: {
@@ -14,13 +14,11 @@ const config: CapacitorConfig = {
       style: "LIGHT",
       backgroundColor: "#f3ead6",
     },
-    plugins: {
-      SystemBars: {
-        insetsHandling: "css",
-        style: "LIGHT",
-        hidden: false,
-        animation: "NONE",
-      },
+    SystemBars: {
+      insetsHandling: "css",
+      style: "LIGHT",
+      hidden: false,
+      animation: "NONE",
     },
   },
 }
