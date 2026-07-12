@@ -19,7 +19,7 @@ export const usePlayRoundStore = defineStore("play-round", () => {
   const level = ref(1)
   const length = ref<WordLength>(5)
   const answer = ref("")
-  const answerCategory = ref<WordCategoryId>("umumy")
+  const answerCategory = ref<WordCategoryId>("adamlar")
   const categoryRevealed = ref(false)
   const answerLetters = computed(() => splitGraphemes(answer.value))
 

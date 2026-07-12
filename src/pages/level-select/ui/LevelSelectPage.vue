@@ -27,7 +27,7 @@ function start(level: number): void {
       <Button variant="secondary" size="icon" aria-label="Yza" @click="router.push('/')">
         <ArrowLeft class="size-5" />
       </Button>
-      <h2 class="font-display text-2xl font-bold">Derejeler</h2>
+      <h2 class="font-display text-2xl font-bold">Seriýalar</h2>
     </div>
 
     <div class="anim-fade-up flex flex-1 flex-col justify-center">

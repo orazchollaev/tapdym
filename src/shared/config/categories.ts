@@ -1,18 +1,24 @@
-/** Kelime kategorileri — tek yerden ayarlanabilir. */
+/** Kelime kategorileri — tek yerden ayarlanabilir. Her kategoriýa manyly ipuç bolmaly. */
 
 export const WORD_CATEGORIES = {
-  umumy: "Umumy", // abstrakt / sypat / galanlar
-  adamlar: "Adamlar", // maşgala, hünär, ynsan atlary
-  beden: "Beden", // beden agzalary
-  esbap: "Esbap", // gurallar, öý goşlary, egin-eşik
-  yer: "Ýer", // ýerler, mekanlar
+  adamlar: "Adamlar", // maşgala, hünär
   at: "At", // adam atlary
-  haywan: "Haýwan",
-  sport: "Sport", // sport görnüşi + toparlar
-  karhana: "Kärhana", // kompaniýa / brend
-  miwe: "Miwe",
-  nahar: "Nahar",
-  tebigat: "Tebigat",
+  beden: "Beden", // beden agzalary
+  haywan: "Haýwan", // haýwanlar
+  guş: "Guş", // guşlar
+  miwe: "Miwe", // miweler
+  gök: "Gök önüm", // gök önümler
+  nahar: "Nahar", // tagamlar
+  esbap: "Esbap", // gurallar, öý goşlary
+  eşik: "Eşik", // egin-eşik
+  ulag: "Ulag", // ulaglar
+  yer: "Ýer", // ýerler, mekanlar
+  tebigat: "Tebigat", // tebigat
+  pasyl: "Pasyl", // paslar, howa
+  reňk: "Reňk", // reňkler
+  sypat: "Sypat", // sypatlar
+  duýgy: "Duýgy", // duýgular
+  sport: "Sport", // sport
 } as const
 
 export type WordCategoryId = keyof typeof WORD_CATEGORIES

@@ -49,7 +49,7 @@ function exit(): void {
       <nav class="anim-fade-up flex w-full flex-col gap-3" style="animation-delay: 200ms">
         <Button size="lg" class="gap-2" @click="router.push('/levels')">
           <ListOrdered class="size-5" />
-          Derejeler
+          Seriýalar
         </Button>
         <Button size="lg" variant="secondary" class="gap-2" @click="router.push('/select')">
           <Play class="size-5" />

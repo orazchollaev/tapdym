@@ -271,7 +271,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
             <Button v-else-if="status === 'lost'" class="flex-1" @click="retryLevel">
               Täzeden
             </Button>
-            <Button variant="secondary" class="flex-1" @click="goMenu">Derejeler</Button>
+            <Button variant="secondary" class="flex-1" @click="goMenu">Seriýalar</Button>
           </template>
           <template v-else>
             <Button class="flex-1" @click="playAgain">Täzeden</Button>

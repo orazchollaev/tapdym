@@ -4,15 +4,11 @@ import { cn } from "@/shared/lib/cn"
 
 const props = defineProps<{
   rows: Cell[][]
-  /** "reveal" pop animasiýasy geçjek hatar. */
   revealRow?: number | null
-  /** Sarsylma (shake) hatary. */
   shakeRow?: number | null
-  /** Ýeňişde bökýän hatar. */
   winRow?: number | null
 }>()
 
-// Juicy: doly reňk ýüz + goýurak aşaky "dodak" (inset shadow) = tagtaly görnüş.
 const stateClass: Record<CellState, string> = {
   empty: "border-2 border-border bg-transparent text-foreground",
   filled: "bg-key-face text-foreground shadow-[inset_0_-0.16em_0_var(--key-shadow)]",
