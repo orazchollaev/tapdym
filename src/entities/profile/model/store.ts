@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
+import { LEVEL_COUNT } from "@/shared/config/levels"
 
 /** Yeni oyuncuya verilen baslangic bakiyesi (ilk ipucular alinabilsin diye). */
 export const STARTING_POINTS = 100
@@ -12,6 +13,8 @@ export const useProfileStore = defineStore(
   "profile",
   () => {
     const totalPoints = ref(STARTING_POINTS)
+    /** Iň ýokary açylan dereje (1-nji elmydama açyk). */
+    const maxLevel = ref(1)
 
     function addPoints(amount: number): void {
       if (amount > 0) totalPoints.value += amount
@@ -24,7 +27,12 @@ export const useProfileStore = defineStore(
       return true
     }
 
-    return { totalPoints, addPoints, spendPoints }
+    /** Berlen derejäni açar (LEVEL_COUNT bilen çäklendirilýär). */
+    function unlockLevel(level: number): void {
+      if (level > maxLevel.value) maxLevel.value = Math.min(level, LEVEL_COUNT)
+    }
+
+    return { totalPoints, maxLevel, addPoints, spendPoints, unlockLevel }
   },
   {
     persist: {

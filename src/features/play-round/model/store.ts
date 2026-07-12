@@ -1,6 +1,7 @@
 import { computed, ref } from "vue"
 import { defineStore } from "pinia"
 import { MAX_GUESSES, FREE_REVEALS, type WordLength } from "@/shared/config/game"
+import { levelLength } from "@/shared/config/levels"
 import { calcScore } from "@/shared/config/scoring"
 import type { WordCategoryId } from "@/shared/config/categories"
 import { splitGraphemes } from "@/shared/lib/text"
@@ -9,10 +10,13 @@ import { bestLetterState, evaluateGuess, type Cell, type LetterState } from "@/e
 import { useProfileStore } from "@/entities/profile"
 
 export type GameStatus = "idle" | "playing" | "won" | "lost"
+export type GameMode = "single" | "levels"
 
 export const usePlayRoundStore = defineStore("play-round", () => {
   const profile = useProfileStore()
 
+  const mode = ref<GameMode>("single")
+  const level = ref(1)
   const length = ref<WordLength>(5)
   const answer = ref("")
   const answerCategory = ref<WordCategoryId>("umumy")
@@ -65,7 +69,7 @@ export const usePlayRoundStore = defineStore("play-round", () => {
 
   const hasRevealed = computed(() => Object.keys(revealed.value).length > 0)
 
-  function startGame(len: WordLength): void {
+  function initRound(len: WordLength): void {
     length.value = len
     const entry = getRandomWord(len)
     answer.value = entry.text
@@ -92,6 +96,19 @@ export const usePlayRoundStore = defineStore("play-round", () => {
       opened[pos] = answerLetters.value[pos]!
     }
     revealed.value = opened
+  }
+
+  /** Ýeke oýun: uzynlyk saýlanýar, tötänleýin söz. */
+  function startGame(len: WordLength): void {
+    mode.value = "single"
+    initRound(len)
+  }
+
+  /** Dereje oýny: uzynlyk derejä görä, tötänleýin söz. */
+  function startLevel(lvl: number): void {
+    mode.value = "levels"
+    level.value = lvl
+    initRound(levelLength(lvl))
   }
 
   function addLetter(letter: string): void {
@@ -140,6 +157,7 @@ export const usePlayRoundStore = defineStore("play-round", () => {
       lastScore.value = calcScore(length.value, attemptsUsed)
       profile.addPoints(lastScore.value)
       status.value = "won"
+      if (mode.value === "levels") profile.unlockLevel(level.value + 1)
     } else if (submittedRows.value.length >= MAX_GUESSES) {
       status.value = "lost"
     }
@@ -177,6 +195,8 @@ export const usePlayRoundStore = defineStore("play-round", () => {
   }
 
   return {
+    mode,
+    level,
     length,
     answer,
     answerCategory,
@@ -195,6 +215,7 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     revealedSkeleton,
     hasRevealed,
     startGame,
+    startLevel,
     addLetter,
     removeLetter,
     submitGuess,

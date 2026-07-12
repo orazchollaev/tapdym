@@ -4,7 +4,7 @@ import { useRouter } from "vue-router"
 import { storeToRefs } from "pinia"
 import { Capacitor } from "@capacitor/core"
 import { App } from "@capacitor/app"
-import { LogOut, Play, Settings, Star } from "@lucide/vue"
+import { ListOrdered, LogOut, Play, Settings, Star } from "@lucide/vue"
 import { APP_AUTHOR, APP_VERSION } from "@/shared/config/app"
 import { Button } from "@/shared/ui/button"
 import { useProfileStore } from "@/entities/profile"
@@ -47,11 +47,15 @@ function exit(): void {
       </div>
 
       <nav class="anim-fade-up flex w-full flex-col gap-3" style="animation-delay: 200ms">
-        <Button size="lg" class="gap-2" @click="router.push('/select')">
-          <Play class="size-5" />
-          Başla
+        <Button size="lg" class="gap-2" @click="router.push('/levels')">
+          <ListOrdered class="size-5" />
+          Derejeler
         </Button>
-        <Button size="lg" variant="secondary" class="gap-2" @click="settingsOpen = true">
+        <Button size="lg" variant="secondary" class="gap-2" @click="router.push('/select')">
+          <Play class="size-5" />
+          Ýeke oýun
+        </Button>
+        <Button size="lg" variant="ghost" class="gap-2" @click="settingsOpen = true">
           <Settings class="size-5" />
           Sazlamalar
         </Button>

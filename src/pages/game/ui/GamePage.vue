@@ -3,8 +3,9 @@ import { computed, onMounted, onUnmounted, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import { storeToRefs } from "pinia"
 import confetti from "canvas-confetti"
-import { ArrowLeft, Lightbulb, Settings, Star, Tag } from "@lucide/vue"
+import { ArrowLeft, Layers, Lightbulb, Settings, Star, Tag } from "@lucide/vue"
 import { ALPHABET } from "@/shared/config/keyboard"
+import { LEVEL_COUNT } from "@/shared/config/levels"
 import { WORD_CATEGORIES } from "@/shared/config/categories"
 import { splitGraphemes } from "@/shared/lib/text"
 import { Button } from "@/shared/ui/button"
@@ -24,6 +25,8 @@ const hint = useHint()
 const catHint = useCategoryHint()
 
 const {
+  mode,
+  level,
   status,
   keyStates,
   displayRows,
@@ -106,7 +109,19 @@ function goMenu(): void {
   dialogOpen.value = false
   winRow.value = null
   game.resetToIdle()
-  router.replace("/")
+  router.replace(game.mode === "levels" ? "/levels" : "/")
+}
+
+function nextLevel(): void {
+  dialogOpen.value = false
+  winRow.value = null
+  game.startLevel(game.level + 1)
+}
+
+function retryLevel(): void {
+  dialogOpen.value = false
+  winRow.value = null
+  game.startLevel(game.level)
 }
 
 onMounted(() => window.addEventListener("keydown", onKeydown))
@@ -125,6 +140,13 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
       >
         <ArrowLeft class="size-5" />
       </Button>
+      <div
+        v-if="mode === 'levels'"
+        class="flex shrink-0 items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-sm text-primary-foreground shadow-[0_3px_0_var(--primary-shadow)]"
+      >
+        <Layers class="size-4" />
+        <span class="font-black tabular-nums">{{ level }}</span>
+      </div>
       <div
         class="flex shrink-0 items-center gap-1 rounded-full bg-present px-2.5 py-1 text-sm text-present-foreground shadow-[0_3px_0_var(--present-shadow)]"
       >
@@ -217,6 +239,10 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
           {{ status === "won" ? "Berekella!" : "Söz tapylmady" }}
         </p>
 
+        <p v-if="mode === 'levels'" class="mt-1 text-sm font-semibold text-muted-foreground">
+          Dereje {{ level }}
+        </p>
+
         <p v-if="status === 'won'" class="mt-2 text-lg">
           <span class="font-bold text-primary">+{{ lastScore }}</span>
           bal
@@ -234,8 +260,23 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
         </div>
 
         <div class="mt-5 flex gap-2">
-          <Button class="flex-1" @click="playAgain">Täzeden</Button>
-          <Button variant="secondary" class="flex-1" @click="goMenu">Menýu</Button>
+          <template v-if="mode === 'levels'">
+            <Button
+              v-if="status === 'won' && level < LEVEL_COUNT"
+              class="flex-1"
+              @click="nextLevel"
+            >
+              Indiki dereje
+            </Button>
+            <Button v-else-if="status === 'lost'" class="flex-1" @click="retryLevel">
+              Täzeden
+            </Button>
+            <Button variant="secondary" class="flex-1" @click="goMenu">Derejeler</Button>
+          </template>
+          <template v-else>
+            <Button class="flex-1" @click="playAgain">Täzeden</Button>
+            <Button variant="secondary" class="flex-1" @click="goMenu">Menýu</Button>
+          </template>
         </div>
       </div>
     </Dialog>
