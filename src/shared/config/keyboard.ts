@@ -14,7 +14,6 @@ export const KEYBOARD_ROWS: readonly (readonly string[])[] = [
 
 /** Esasy harp -> basyp-saklama bilen çykýan aksentli görnüşleri. */
 export const KEY_VARIANTS: Record<string, readonly string[]> = {
-  z: ["ž"],
   n: ["ň"],
   o: ["ö"],
   s: ["ş"],
