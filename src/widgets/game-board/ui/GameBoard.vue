@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onBeforeUnmount, ref, watch } from "vue"
 import type { Cell, CellState } from "@/entities/guess"
 import { cn } from "@/shared/lib/cn"
 
@@ -16,6 +17,42 @@ const stateClass: Record<CellState, string> = {
   present: "bg-present text-present-foreground shadow-[inset_0_-0.18em_0_var(--present-shadow)]",
   absent: "bg-absent text-absent-foreground shadow-[inset_0_-0.18em_0_var(--absent-shadow)]",
 }
+
+// Reveal renkleri, harf zıplamasının tepe noktasında soldan sağa tek tek açılır
+// (app logosundaki reveal animasyonuyla aynı ritim).
+const REVEAL_STEP = 90
+const REVEAL_FLIP = 160
+
+// Açık hatarda: her sütun için, rengi henüz açıldı mı?
+const flipped = ref<Record<number, boolean>>({})
+let flipTimers: number[] = []
+
+watch(
+  () => props.revealRow,
+  (r) => {
+    flipTimers.forEach(clearTimeout)
+    flipTimers = []
+    flipped.value = {}
+    if (r == null) return
+    const cols = props.rows[r]?.length ?? 0
+    for (let c = 0; c < cols; c++) {
+      flipTimers.push(
+        window.setTimeout(() => {
+          flipped.value = { ...flipped.value, [c]: true }
+        }, c * REVEAL_STEP + REVEAL_FLIP)
+      )
+    }
+  },
+  { immediate: true }
+)
+
+onBeforeUnmount(() => flipTimers.forEach(clearTimeout))
+
+// Açılış sırasında rengi henüz açılmamış hücre "filled" (nötr) görünür.
+function cellState(r: number, c: number, cell: Cell): CellState {
+  if (props.revealRow === r && !flipped.value[c]) return "filled"
+  return cell.state
+}
 </script>
 
 <template>
@@ -32,7 +69,7 @@ const stateClass: Record<CellState, string> = {
         :class="
           cn(
             'flex aspect-square w-full min-w-[1.4em] max-w-[1.9em] items-center justify-center rounded-xl text-[1.1em] font-extrabold uppercase transition-colors',
-            stateClass[cell.state],
+            stateClass[cellState(r, c, cell)],
             cell.state === 'filled' && 'cell-pop',
             revealRow === r && 'cell-reveal',
             winRow === r && 'cell-win'
