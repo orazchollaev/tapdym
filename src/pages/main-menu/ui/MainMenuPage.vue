@@ -33,7 +33,7 @@ function exit(): void {
       <header class="text-center">
         <img src="/logo.png" alt="Tapdym" class="anim-fade-up mx-auto w-128 max-w-full" />
         <p class="anim-fade-up mt-3 text-muted-foreground" style="animation-delay: 80ms">
-          Türkmen söz tapmaça oýny
+          Türkmençe söz tapmaça oýuny
         </p>
       </header>
 
