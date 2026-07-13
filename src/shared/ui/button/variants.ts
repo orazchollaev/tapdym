@@ -10,6 +10,11 @@ export const buttonVariants = cva(
           "bg-primary text-primary-foreground shadow-[0_4px_0_var(--primary-shadow)] hover:brightness-105 active:translate-y-[3px] active:shadow-[0_1px_0_var(--primary-shadow)]",
         secondary:
           "bg-card text-card-foreground shadow-[0_4px_0_var(--key-shadow)] hover:brightness-[1.03] active:translate-y-[3px] active:shadow-[0_1px_0_var(--key-shadow)]",
+        // Oýnuň öz plitka reňkleri — ikinji derejeli hereketler üçin.
+        accent:
+          "bg-accent text-accent-foreground shadow-[0_4px_0_var(--accent-shadow)] hover:brightness-105 active:translate-y-[3px] active:shadow-[0_1px_0_var(--accent-shadow)]",
+        neutral:
+          "bg-absent text-absent-foreground shadow-[0_4px_0_var(--absent-shadow)] hover:brightness-105 active:translate-y-[3px] active:shadow-[0_1px_0_var(--absent-shadow)]",
         outline: "border-2 border-border bg-transparent hover:bg-muted text-foreground",
         ghost: "bg-transparent hover:bg-muted text-foreground",
       },

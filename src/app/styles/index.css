@@ -24,14 +24,13 @@
   --absent-shadow: #766a54;
   --accent: #b5651d;
   --accent-foreground: #fef6e6;
+  --accent-shadow: #7d420f;
 
-  /* Galgan (raised) ýüzler — klawiş, kart, plitka. */
   --key-face: #fff7e8;
   --key-shadow: #cdbd9a;
 
   --radius: 0.75rem;
   --font-display: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
-  --font-title: "Bricolage Grotesque", "Segoe UI", Roboto, system-ui, sans-serif;
 }
 
 :root.dark {
@@ -58,6 +57,7 @@
   --absent-shadow: #766a54;
   --accent: #b5651d;
   --accent-foreground: #fef6e6;
+  --accent-shadow: #7d420f;
 
   --key-face: #34271d;
   --key-shadow: #17100b;
@@ -83,6 +83,7 @@
   --color-absent-foreground: var(--absent-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-shadow: var(--accent-shadow);
   --color-primary-shadow: var(--primary-shadow);
   --color-correct-shadow: var(--correct-shadow);
   --color-present-shadow: var(--present-shadow);
