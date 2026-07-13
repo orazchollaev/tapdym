@@ -7,7 +7,6 @@ function prefersDark(): boolean {
   return window.matchMedia("(prefers-color-scheme: dark)").matches
 }
 
-/** Ulanyjynyň saýlan temasy (açyk/garaňky) — localStorage'da saklanýar. */
 export const useThemeStore = defineStore(
   "theme",
   () => {

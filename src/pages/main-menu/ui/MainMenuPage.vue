@@ -10,7 +10,7 @@ import { Button } from "@/shared/ui/button"
 import { useProfileStore } from "@/entities/profile"
 import { SettingsDialog } from "@/widgets/settings-dialog"
 import { AppLogo } from "@/widgets/app-logo"
-import CarpetBackdrop from "./CarpetBackdrop.vue"
+import BoardBackdrop from "./BoardBackdrop.vue"
 
 const router = useRouter()
 const profile = useProfileStore()
@@ -31,7 +31,7 @@ function exit(): void {
   <main
     class="relative mx-auto flex min-h-full max-w-md flex-col items-center overflow-hidden px-6 py-10"
   >
-    <CarpetBackdrop />
+    <BoardBackdrop />
 
     <div class="relative z-10 flex w-full flex-1 flex-col items-center">
       <!-- Logo we bal ýokarky boş meýdanyň ortasynda durýar, menýu aşak süýşýär. -->
