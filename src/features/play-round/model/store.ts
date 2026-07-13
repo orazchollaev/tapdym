@@ -98,13 +98,11 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     revealed.value = opened
   }
 
-  /** Ýeke oýun: uzynlyk saýlanýar, tötänleýin söz. */
   function startGame(len: WordLength): void {
     mode.value = "single"
     initRound(len)
   }
 
-  /** Dereje oýny: uzynlyk derejä görä, tötänleýin söz. */
   function startLevel(lvl: number): void {
     mode.value = "levels"
     level.value = lvl
@@ -124,7 +122,6 @@ export const usePlayRoundStore = defineStore("play-round", () => {
   function submitGuess(): void {
     if (!canPlay.value) return
     if (!isFull.value) {
-      // Kem harp bilen Enter — hatar sarsýar, tabşyrylmaýar.
       shakeNonce.value += 1
       return
     }
@@ -140,7 +137,6 @@ export const usePlayRoundStore = defineStore("play-round", () => {
     submittedRows.value.push(row)
     revealRow.value = submittedRows.value.length - 1
 
-    // Klavye renklerini guncelle (en iyi durum kalir).
     const next = { ...keyStates.value }
     letters.forEach((letter, i) => {
       const s = states[i]!

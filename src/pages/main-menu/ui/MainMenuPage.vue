@@ -53,7 +53,7 @@ function exit(): void {
         </Button>
         <Button size="lg" variant="secondary" class="gap-2" @click="router.push('/select')">
           <Play class="size-5" />
-          Ýeke oýun
+          Bir gezeklik
         </Button>
         <Button size="lg" variant="ghost" class="gap-2" @click="settingsOpen = true">
           <Settings class="size-5" />
