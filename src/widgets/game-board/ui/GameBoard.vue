@@ -37,9 +37,12 @@ watch(
     const cols = props.rows[r]?.length ?? 0
     for (let c = 0; c < cols; c++) {
       flipTimers.push(
-        window.setTimeout(() => {
-          flipped.value = { ...flipped.value, [c]: true }
-        }, c * REVEAL_STEP + REVEAL_FLIP)
+        window.setTimeout(
+          () => {
+            flipped.value = { ...flipped.value, [c]: true }
+          },
+          c * REVEAL_STEP + REVEAL_FLIP
+        )
       )
     }
   },
@@ -68,7 +71,7 @@ function cellState(r: number, c: number, cell: Cell): CellState {
         :style="revealRow === r || winRow === r ? { animationDelay: `${c * 90}ms` } : undefined"
         :class="
           cn(
-            'flex aspect-square w-full min-w-[1.4em] max-w-[1.9em] items-center justify-center rounded-xl text-[1.1em] font-extrabold uppercase transition-colors',
+            'flex aspect-square w-full min-w-[1.4em] max-w-[1.9em] items-center justify-center rounded-xl text-[1.1em] font-semibold uppercase transition-colors',
             stateClass[cellState(r, c, cell)],
             cell.state === 'filled' && 'cell-pop',
             revealRow === r && 'cell-reveal',

@@ -37,7 +37,7 @@ function start(level: number): void {
           :key="n"
           :variant="n <= maxLevel ? 'default' : 'secondary'"
           :disabled="n > maxLevel"
-          class="aspect-square h-auto text-xl font-black"
+          class="aspect-square h-auto text-xl font-semibold"
           :aria-label="`Dereje ${n}`"
           @click="start(n)"
         >

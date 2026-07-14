@@ -49,7 +49,7 @@ function exit(): void {
         >
           <Star class="size-3.5 fill-current" />
           Jemi bal:
-          <span class="text-sm font-black">{{ totalPoints }}</span>
+          <span class="text-sm font-semibold">{{ totalPoints }}</span>
         </div>
       </div>
 

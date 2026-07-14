@@ -145,13 +145,13 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
         class="flex shrink-0 items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-sm text-primary-foreground shadow-[0_3px_0_var(--primary-shadow)]"
       >
         <Layers class="size-4" />
-        <span class="font-black tabular-nums">{{ level }}</span>
+        <span class="font-semibold tabular-nums">{{ level }}</span>
       </div>
       <div
         class="flex shrink-0 items-center gap-1 rounded-full bg-present px-2.5 py-1 text-sm text-present-foreground shadow-[0_3px_0_var(--present-shadow)]"
       >
         <Star class="size-4 fill-current" />
-        <span class="font-black">{{ totalPoints }}</span>
+        <span class="font-semibold">{{ totalPoints }}</span>
       </div>
 
       <div class="ml-auto flex items-center gap-1.5">
@@ -235,7 +235,7 @@ onUnmounted(() => window.removeEventListener("keydown", onKeydown))
     <!-- Netije penjiresi -->
     <Dialog v-model:open="dialogOpen">
       <div class="text-center">
-        <p class="font-display text-3xl font-extrabold text-primary">
+        <p class="font-display text-3xl font-semibold text-primary">
           {{ status === "won" ? "Berekella!" : "Söz tapylmady" }}
         </p>
 

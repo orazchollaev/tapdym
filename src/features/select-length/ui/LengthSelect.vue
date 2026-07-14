@@ -17,7 +17,7 @@ const emit = defineEmits<{ select: [length: WordLength] }>()
       @click="emit('select', len)"
     >
       <span
-        class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-2xl font-black text-primary-foreground shadow-[0_3px_0_var(--primary-shadow)]"
+        class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary text-2xl font-semibold text-primary-foreground shadow-[0_3px_0_var(--primary-shadow)]"
       >
         {{ len }}
       </span>

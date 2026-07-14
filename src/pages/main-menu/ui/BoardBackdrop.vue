@@ -56,8 +56,8 @@ const stateClass: Record<CellState, string> = {
   absent: "bg-absent text-absent-foreground",
 }
 
-const MAX_OPACITY = 0.22
-const MIN_OPACITY = 0.01
+const MAX_OPACITY = 0.18
+const MIN_OPACITY = 0.005
 
 function tileOpacity(r: number, c: number): number {
   const dr = Math.abs(r - (ROWS - 1) / 2) / ((ROWS - 1) / 2)
@@ -80,7 +80,7 @@ function tileOpacity(r: number, c: number): number {
         :key="c"
         :style="{ opacity: tileOpacity(r, c) }"
         :class="[
-          'flex aspect-square w-[1.7em] shrink-0 items-center justify-center rounded-[0.4em] text-[0.6em] font-extrabold uppercase',
+          'flex aspect-square w-[1.7em] shrink-0 items-center justify-center rounded-[0.4em] text-[0.6em] font-semibold uppercase',
           stateClass[tile.state],
         ]"
       >

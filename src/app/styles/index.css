@@ -30,7 +30,7 @@
   --key-shadow: #cdbd9a;
 
   --radius: 0.75rem;
-  --font-display: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-display: "Baloo 2", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
 }
 
 :root.dark {
@@ -115,7 +115,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family:
-    "IBM Plex Sans",
+    "Baloo 2",
     system-ui,
     -apple-system,
     "Segoe UI",
@@ -124,14 +124,14 @@ body {
     Arial,
     sans-serif;
   /* hondo: kararly taban agyrlyk. */
-  font-weight: 500;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
 
 .font-display {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 

@@ -88,7 +88,7 @@ onBeforeUnmount(() => timers.forEach(clearTimeout))
       :key="i"
       :class="
         cn(
-          'flex aspect-square w-[1.7em] items-center justify-center rounded-xl text-[1em] font-extrabold uppercase transition-colors select-none',
+          'flex aspect-square w-[1.7em] items-center justify-center rounded-xl text-[1em] font-semibold uppercase transition-colors select-none',
           stateClass[cell.state],
           cell.anim
         )
