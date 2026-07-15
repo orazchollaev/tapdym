@@ -1,259 +1,48 @@
 import type { WordLength } from "@/shared/config/game"
+import { WORD_LENGTHS } from "@/shared/config/game"
 import type { WordCategoryId } from "@/shared/config/categories"
+import { WORD_CATEGORIES } from "@/shared/config/categories"
+import rawWords from "./words.json"
 
 export interface WordEntry {
   readonly text: string
   readonly category: WordCategoryId
 }
 
-/** Bir kategoriya altinda birden fazla kelimeyi kisa yazmak icin yardimci. */
-function cat(category: WordCategoryId, ...texts: string[]): WordEntry[] {
-  return texts.map((text) => ({ text, category }))
+function graphemeLength(text: string): number {
+  return [...text].length
 }
 
-const words4: readonly WordEntry[] = [
-  ...cat(
-    "adamlar",
-    "adam",
-    "aýal",
-    "çaga",
-    "daýy",
-    "dost",
-    "jora",
-    "kaka",
-    "ogul",
-    "baba",
-    "jigi",
-    "işçi",
-    "mama",
-    "ussa"
-  ),
-  ...cat(
-    "at",
-    "aman",
-    "oraz",
-    "nury",
-    "hoja",
-    "maýa",
-    "bibi",
-    "sara",
-    "alty",
-    "eneş",
-    "käbe",
-    "wepa",
-    "sapa",
-    "öwez",
-    "weli"
-  ),
-  ...cat("beden", "aýak", "arka", "egin", "süňk", "deri", "ýara"),
-  ...cat("haywan", "düýe", "guzy", "gurt", "öküz", "geçi", "eşek", "tazy"),
-  ...cat("miwe", "alma", "üzüm", "erik", "ülje", "kiwi", "alça"),
-  ...cat("gök", "kädi", "burç"),
-  ...cat("nahar", "süýt", "tüwi", "unaş", "kofe", "şüle"),
-  ...cat("esbap", "açar", "çyra", "elek", "gapy", "haly", "käse", "orak", "aýna", "guty", "iňňe"),
-  ...cat("eşik", "eşik", "ýaka"),
-  ...cat("ulag", "uçar", "gämi", "otly"),
-  ...cat(
-    "yer",
-    "gala",
-    "köçe",
-    "otag",
-    "ülke",
-    "guýy",
-    "ojak",
-    "depe",
-    "mülk",
-    "bina",
-    "park",
-    "ýoda"
-  ),
-  ...cat("tebigat", "agaç", "gaýa", "läle", "odun", "däne", "ekin", "çäge", "şaha", "älem"),
-  ...cat("pasyl", "güýz", "howa"),
-  ...cat("reňk", "gara", "sary", "mele"),
-  ...cat(
-    "sypat",
-    "uzyn",
-    "gowy",
-    "doly",
-    "täze",
-    "köne",
-    "ökde",
-    "agyr",
-    "gury",
-    "açyk",
-    "yssy",
-    "inçe"
-  ),
-  ...cat("duýgy", "bagt", "umyt"),
-  ...cat("sport", "küşt", "boks", "golf"),
-]
+const wordLengths = new Set<number>(WORD_LENGTHS)
 
-const words5: readonly WordEntry[] = [
-  ...cat(
-    "adamlar",
-    "oglan",
-    "ýigit",
-    "gelin",
-    "tebip",
-    "çopan",
-    "zenan",
-    "aşpez",
-    "dogan",
-    "körpe",
-    "ussat"
-  ),
-  ...cat(
-    "at",
-    "myrat",
-    "aýnur",
-    "gözel",
-    "kerim",
-    "selim",
-    "resul",
-    "batyr",
-    "sapar",
-    "jemal",
-    "berdi",
-    "gunça",
-    "ahmet",
-    "rejep",
-    "rahat",
-    "toýly",
-    "suhan",
-    "nazar",
-    "maýsa",
-    "näzli",
-    "kasym",
-    "aýlar",
-    "kemal",
-    "kaýum"
-  ),
-  ...cat("beden", "burun", "ýürek", "kelle", "ýaňak", "gujak"),
-  ...cat(
-    "haywan",
-    "balyk",
-    "pişik",
-    "tilki",
-    "bedew",
-    "doňuz",
-    "kirpi",
-    "ýylan",
-    "möjek",
-    "sygyr",
-    "syçan",
-    "maral",
-    "keýik"
-  ),
-  ...cat("guş", "durna", "horaz", "garga", "towuk", "laçyn", "serçe", "gumry"),
-  ...cat("miwe", "gawun", "hurma", "banan", "limon", "armyt", "injir"),
-  ...cat("gök", "kelem", "sogan", "käşir", "hyýar"),
-  ...cat(
-    "nahar",
-    "çörek",
-    "nahar",
-    "şeker",
-    "palow",
-    "süýji",
-    "gatyk",
-    "börek",
-    "somsa",
-    "gutap",
-    "ýarma"
-  ),
-  ...cat("esbap", "galam", "darak", "palta", "sagat", "surat", "taýak", "gazan", "perde", "çemçe"),
-  ...cat("eşik", "jorap", "kürte", "balak", "ýüpek"),
-  ...cat("ulag", "tigir", "gaýyk", "araba", "maşyn"),
-  ...cat("yer", "köpri", "şäher", "dünýä", "howuz", "mekan", "dükan", "bazar"),
-  ...cat(
-    "tebigat",
-    "kömür",
-    "pagta",
-    "deňiz",
-    "bägül",
-    "çeşme",
-    "derýa",
-    "sähra",
-    "umman",
-    "tokaý",
-    "çemen",
-    "asman"
-  ),
-  ...cat("pasyl", "tomus", "bahar", "bulut", "ýagyş"),
-  ...cat("reňk", "gyzyl", "ýaşyl", "goňur"),
-  ...cat("sypat", "sowuk", "semiz", "teşne", "beýik", "dogry", "galyň", "arzan", "ýalta"),
-  ...cat("duýgy", "söýgi", "gahar", "gaýgy", "höwes", "gorky"),
-  ...cat("sport", "göreş", "topar", "ýaryş", "kubok", "medal"),
-]
-
-const words6: readonly WordEntry[] = [
-  ...cat(
-    "adamlar",
-    "daýhan",
-    "başlyk",
-    "serdar",
-    "şägirt",
-    "zergär",
-    "okuwçy",
-    "ýazyjy",
-    "lukman",
-    "ýoldaş",
-    "gassap",
-    "bagban"
-  ),
-  ...cat(
-    "at",
-    "merdan",
-    "gurban",
-    "maksat",
-    "gulnar",
-    "döwran",
-    "begenç",
-    "şöhrat",
-    "arslan",
-    "rüstem",
-    "baýram",
-    "kuwwat"
-  ),
-  ...cat("beden", "barmak", "kirpik", "dyrnak", "böwrek", "baldyr", "maňlaý"),
-  ...cat("haywan", "maýmyn", "towşan", "gaplaň", "torsuk", "porsuk"),
-  ...cat("guş", "bilbil", "bürgüt", "leýlek", "sülgün"),
-  ...cat("miwe", "zeýtun", "garpyz", "ananas", "garaly"),
-  ...cat("nahar", "peýnir", "çelpek", "şaşlyk", "gaýmak", "agaran"),
-  ...cat("esbap", "deprek", "tüýdük", "ýorgan", "sandyk", "çarşak", "çäýnek", "depder"),
-  ...cat("eşik", "köýnek", "ýaglyk", "penjek", "telpek"),
-  ...cat("ulag", "ýelken"),
-  ...cat("yer", "mekdep", "menzil", "merkez", "gümmez", "metjit", "gyşlak", "ýaýlag"),
-  ...cat(
-    "tebigat",
-    "bugdaý",
-    "meýdan",
-    "toprak",
-    "ýaprak",
-    "ýyldyz",
-    "palçyk",
-    "gowaça",
-    "daglar",
-    "gülzar"
-  ),
-  ...cat("pasyl", "ýagmyr"),
-  ...cat("sypat", "salkyn", "belent", "ýabany", "ýumşak", "owadan", "gymmat", "bagtly", "güýçli"),
-  ...cat("duýgy", "şatlyk", "hormat", "lezzet"),
-  ...cat(
-    "sport",
-    "futbol",
-    "basket",
-    "tennis",
-    "hokkeý",
-    "türgen",
-    "oýunçy",
-    "boksçy",
-    "pälwan",
-    "mergen"
-  ),
-]
-
-export const WORDS_BY_LENGTH: Record<WordLength, readonly WordEntry[]> = {
-  4: words4,
-  5: words5,
-  6: words6,
+function isWordCategory(id: string): id is WordCategoryId {
+  return Object.prototype.hasOwnProperty.call(WORD_CATEGORIES, id)
 }
+
+function buildWordsByLength(): Record<WordLength, readonly WordEntry[]> {
+  const buckets: Record<WordLength, WordEntry[]> = { 4: [], 5: [], 6: [], 7: [] }
+  const source = rawWords as Record<string, readonly string[]>
+
+  for (const [category, texts] of Object.entries(source)) {
+    if (!isWordCategory(category)) {
+      if (import.meta.env.DEV) console.warn(`[words] näbelli category "${category}" düşürildi`)
+      continue
+    }
+    for (const text of texts) {
+      const len = graphemeLength(text)
+      if (!wordLengths.has(len)) {
+        if (import.meta.env.DEV) {
+          console.warn(
+            `[words] "${text}" uzynlygy ${len}, goldanýan ${[...wordLengths]} — düşürildi`
+          )
+        }
+        continue
+      }
+      buckets[len as WordLength].push({ text, category })
+    }
+  }
+
+  return buckets
+}
+
+export const WORDS_BY_LENGTH: Record<WordLength, readonly WordEntry[]> = buildWordsByLength()
