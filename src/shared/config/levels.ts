@@ -4,7 +4,8 @@ export const LEVEL_COUNT = 20
 
 /** Dereje → söz uzynlygy. Kynlyk ýokarlanýar. */
 export function levelLength(level: number): WordLength {
-  if (level <= 7) return 4 // 1–7
-  if (level <= 14) return 5 // 8–14
-  return 6 // 15–20
+  if (level <= 5) return 4 // 1–5
+  if (level <= 10) return 5 // 6–10
+  if (level <= 15) return 6 // 11–15
+  return 7 // 16–20
 }
